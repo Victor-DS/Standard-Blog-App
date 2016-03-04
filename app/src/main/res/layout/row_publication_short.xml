@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingBottom="1dp"
+    android:paddingTop="1dp">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="5dp"
+        style="@style/CardView.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/contentLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SAMPLE TITLE"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    style="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SAMPLE DESCRIPTION"
+                    android:textSize="14sp"
+                    style="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/textTimeAgo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SAMPLE TIME_AGO"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    style="@style/Base.TextAppearance.AppCompat.Small" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <ImageView
+                android:id="@+id/imageViewCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_menu_share"
+                android:visibility="visible"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/contentLayout"
+                android:layout_toEndOf="@+id/contentLayout" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

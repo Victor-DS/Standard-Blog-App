@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="use_mobile_data"
+        android:summary="@string/pref_description_mobile_data"
+        android:title="@string/pref_title_mobile_data" />
+
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <ListPreference
+        android:defaultValue="3"
+        android:entries="@array/pref_sync_frequency_titles"
+        android:entryValues="@array/pref_sync_frequency_values"
+        android:key="sync_frequency"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_sync_frequency" />
+
+    <ListPreference
+        android:defaultValue="-1"
+        android:entries="@array/pref_sync_keep_up_to_titles"
+        android:entryValues="@array/pref_sync_keep_up_to_values"
+        android:key="posts_to_keep"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_sync_keep_up_to" />
+</PreferenceScreen>

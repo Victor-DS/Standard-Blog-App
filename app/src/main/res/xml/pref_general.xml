@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="publicity_post"
+        android:summary="@string/pref_description_publicity"
+        android:title="@string/pref_title_publicity" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notification_new_post"
+        android:summary="@string/pref_description_new_post_notification"
+        android:title="@string/pref_title_new_post_notification" />
+
+</PreferenceScreen>

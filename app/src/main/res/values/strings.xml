@@ -1,0 +1,81 @@
+<resources>
+    <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
+    <string name="app_name">Não Salvo</string>
+    <!--<string name="app_name">Standard Blog App</string>-->
+    <string name="feed_url">http://www.naosalvo.com.br/feed/</string>
+    <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
+    <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
+
+    <string name="synchronizing">Synchronizing...</string>
+
+    <string name="hours_ago"> hours ago</string>
+    <string name="days_ago"> days ago</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Menu -->
+    <string name="home">Home</string>
+    <string name="about">About</string>
+    <string name="categories">Categories</string>
+
+
+    <!-- Strings related to Settings -->
+    <!-- Publication Fragment Settings -->
+    <string name="share_option">Share</string>
+    <string name="comments_option">View comments</string>
+    <string name="view_on_web_option">View on web</string>
+
+    <!-- Publication settings (general) -->
+    <string name="pref_header_general">Publications</string>
+
+    <string name="pref_title_publicity">Marketing posts</string>
+    <string name="pref_description_publicity">Shows posts tagged as Marketing content
+        (Works only if it\'s properly tagged)</string>
+
+    <string name="pref_title_new_post_notification">Notify about new posts</string>
+    <string name="pref_description_new_post_notification">Sends you a notification when
+        synchronization is done, and there are new posts.</string>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_mobile_data">Use mobile data</string>
+    <string name="pref_description_mobile_data">Uses your mobile data plan to synchronize posts on
+        background. (Recommended: OFF)</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>6</item>
+        <item>12</item>
+    </string-array>
+
+    <string name="pref_title_sync_keep_up_to">Keep up to</string>
+    <string-array name="pref_sync_keep_up_to_titles">
+        <item>250 posts</item>
+        <item>500 posts</item>
+        <item>1000 posts</item>
+        <item>Unlimited</item>
+    </string-array>
+    <string-array name="pref_sync_keep_up_to_values">
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>-1</item>
+    </string-array>
+
+</resources>
