@@ -16,9 +16,10 @@ It's basically a single open-source RSS feed reader for your own blog.
 - Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
 - New card layout;
 - Tablet adapter (full post);
-- Double press to exit;
+- ~~Double press to exit;~~
 - AdMob;
 - Filter patrocinated posts (?);
 - Widget (v2 only);
 - Save and share buttons at ViewImageFragment;
 - Finish up layout for ViewImageFragment;
+- Share and comments button on WebView;
