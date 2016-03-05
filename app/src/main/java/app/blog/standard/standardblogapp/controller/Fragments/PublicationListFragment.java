@@ -32,6 +32,7 @@ import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 public class PublicationListFragment extends Fragment {
 
     //region variables
+
     private final String TAG = this.getClass().getSimpleName();
     private int CURRENT_SKIP = 0;
 
@@ -47,7 +48,7 @@ public class PublicationListFragment extends Fragment {
     private String category;
     //endregion
 
-    //region initialization methods
+    //region Constructor
     public PublicationListFragment() {}
 
     public static PublicationListFragment newInstance() {
@@ -65,7 +66,9 @@ public class PublicationListFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    //endregion
 
+    //region Lifecycle methods
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,7 +171,9 @@ public class PublicationListFragment extends Fragment {
                     PublicationHelper.DEFAULT_PAGE_SIZE);
         }
     }
+    //endregion
 
+    //region interaction
     /**
      *
      * @param category Category name, or null for ALL.
@@ -183,9 +188,14 @@ public class PublicationListFragment extends Fragment {
         mRecyclerView.getAdapter().notifyDataSetChanged();
         mRecyclerView.invalidate();
     }
-    //endregion
 
-    //region interaction
+    public void sync() {
+        if(!networkHelper.hasPreferedConnection()) return;
+
+        CURRENT_SKIP = 0;
+        new OnlineSync(getActivity()).execute();
+    }
+
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Publication item);
     }
@@ -227,8 +237,6 @@ public class PublicationListFragment extends Fragment {
             aPublications.addAll(getNextPublications());
             mRecyclerView.getAdapter().notifyDataSetChanged();
             mRecyclerView.invalidate();
-
-            //Toast?
         }
 
     }

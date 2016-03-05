@@ -6,8 +6,12 @@
     <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
-    <string name="synchronizing">Synchronizing...</string>
+    <!-- PublicationList -->
+    <string name="double_press_to_exit">Press again to exit</string>
 
+    <string name="synchronizing">Synchronizing&#8230;</string>
+
+    <!-- PublicationAdapter -->
     <string name="hours_ago"> hours ago</string>
     <string name="days_ago"> days ago</string>
 

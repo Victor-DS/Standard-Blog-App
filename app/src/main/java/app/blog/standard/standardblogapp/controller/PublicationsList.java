@@ -2,7 +2,9 @@ package app.blog.standard.standardblogapp.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,12 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.DefaultWebviewFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.ViewImageFragment;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.util.NetworkHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 
 public class PublicationsList extends AppCompatActivity
@@ -23,9 +27,14 @@ public class PublicationsList extends AppCompatActivity
         PublicationListFragment.OnListFragmentInteractionListener,
         DefaultWebviewFragment.OnWebViewClickListener {
 
+    //region variables
     private PublicationHelper publicationHelper;
     private PublicationListFragment publicationListFragment;
 
+    private boolean doubleBackToExitPressedOnce;
+    //endregion
+
+    //region Lifecycle methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +57,8 @@ public class PublicationsList extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
 
-        String[] categories = publicationHelper.getAllCategories();
-
-        for(int index = 0; index < categories.length; index++)
-            menu.add(categories[index]);
+        for(String category : publicationHelper.getAllCategories())
+            menu.add(category);
         //endregion
 
         publicationListFragment = PublicationListFragment.newInstance();
@@ -64,24 +71,44 @@ public class PublicationsList extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        publicationListFragment.sync();
+    }
+    //endregion
+
+    //region Interaction
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            //TODO Add double press to exit
-            super.onBackPressed();
+            return;
         }
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, R.string.double_press_to_exit, Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         switch(item.getItemId()) {
             case R.id.nav_home:
-//                publicationListFragment.switchCategory(null);
+                getSupportFragmentManager().popBackStack(null,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
 
             case R.id.nav_about:
@@ -102,7 +129,6 @@ public class PublicationsList extends AppCompatActivity
                                 PublicationListFragment.newInstance(item.getTitle().toString()))
                         .addToBackStack(null)
                         .commit();
-//                publicationListFragment.switchCategory(item.getTitle().toString());
                 break;
         }
 
@@ -110,7 +136,9 @@ public class PublicationsList extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    //endregion
 
+    //region Implemented Methods
     @Override
     public void onListFragmentInteraction(Publication item) {
         getSupportFragmentManager().beginTransaction()
@@ -126,4 +154,5 @@ public class PublicationsList extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();
     }
+    //endregion
 }
