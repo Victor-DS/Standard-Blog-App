@@ -110,7 +110,7 @@ public class PublicationsList extends AppCompatActivity
     public void onListFragmentInteraction(Publication item) {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, DefaultWebviewFragment.newInstance(item))
-                .addToBackStack("Post")
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -118,7 +118,7 @@ public class PublicationsList extends AppCompatActivity
     public void onImageClicked(String url) {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, ViewImageFragment.newInstance(url))
-                .addToBackStack("Image")
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -117,8 +117,9 @@ public class DefaultWebviewFragment extends Fragment {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
 
+                //TODO Fix scroll problem
+
                 if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
-                    //TODO
                     mListener.onImageClicked(hitTestResult.getExtra());
                     return true;
                 }
