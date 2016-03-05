@@ -16,12 +16,14 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 
 import java.net.URL;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.controller.hacky.HackyClickListener;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 
@@ -112,12 +114,25 @@ public class DefaultWebviewFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(true);
             }
         });
-        mWebView.setOnTouchListener(new View.OnTouchListener() {
+//        mWebView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
+//
+//                //TODO Fix scroll problem
+//
+//                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
+//                    mListener.onImageClicked(hitTestResult.getExtra());
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+        mWebView.setOnTouchListener(new HackyClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean OnClickListener() {
                 WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
-
-                //TODO Fix scroll problem
 
                 if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
                     mListener.onImageClicked(hitTestResult.getExtra());
@@ -158,7 +173,7 @@ public class DefaultWebviewFragment extends Fragment {
     public void loadUrl(String html) {
         if (mIsWebViewAvailable) getWebView().loadUrl(url = html);
         else
-            Log.w("ImprovedWebViewFragment", "WebView cannot be found. Check the view and fragment have been loaded.");
+            Log.w("DefaultWebViewFragment", "WebView cannot be found. Check the view and fragment have been loaded.");
     }
 
     /**
