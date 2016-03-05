@@ -81,7 +81,7 @@ public class PublicationsList extends AppCompatActivity
 
         switch(item.getItemId()) {
             case R.id.nav_home:
-                publicationListFragment.switchCategory(null);
+//                publicationListFragment.switchCategory(null);
                 break;
 
             case R.id.nav_about:
@@ -97,7 +97,12 @@ public class PublicationsList extends AppCompatActivity
                 break;
 
             default: //Categories
-                publicationListFragment.switchCategory(item.getTitle().toString());
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container,
+                                PublicationListFragment.newInstance(item.getTitle().toString()))
+                        .addToBackStack(null)
+                        .commit();
+//                publicationListFragment.switchCategory(item.getTitle().toString());
                 break;
         }
 

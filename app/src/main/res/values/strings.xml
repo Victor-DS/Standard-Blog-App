@@ -41,6 +41,10 @@
     <string name="pref_description_new_post_notification">Sends you a notification when
         synchronization is done, and there are new posts.</string>
 
+    <!-- Fragment ViewImage -->
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 

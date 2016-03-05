@@ -32,7 +32,6 @@ import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 public class PublicationListFragment extends Fragment {
 
     //region variables
-
     private final String TAG = this.getClass().getSimpleName();
     private int CURRENT_SKIP = 0;
 
