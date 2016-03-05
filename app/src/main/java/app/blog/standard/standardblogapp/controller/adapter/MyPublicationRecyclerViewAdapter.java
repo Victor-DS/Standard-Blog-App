@@ -109,11 +109,11 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPub
 
         String mIcon = mPublications.get(position).getPublicationImage();
 
-        if(mIcon != null && !mIcon.isEmpty()) {
-            oImageLoader.displayImage(mIcon, holder.imageIcon, oDisplayImageOptions, oImageLoadingListener);
-        } else {
-            holder.imageIcon.setVisibility(View.GONE);
-        }
+//        if(mIcon != null && !mIcon.isEmpty()) {
+//            oImageLoader.displayImage(mIcon, holder.imageIcon, oDisplayImageOptions, oImageLoadingListener);
+//        } else {
+//            holder.imageIcon.setVisibility(View.GONE);
+//        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
