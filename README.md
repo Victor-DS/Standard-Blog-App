@@ -9,14 +9,16 @@ It's basically a single open-source RSS feed reader for your own blog.
 
 
 ## TODO
-- Fix PhotoView Zoom out bug;
+- ~~Fix PhotoView Zoom out bug;~~
 - Background syncing;
-- Scroll x Tap issue;
-- When filtering by categories, open it in a new fragment;
+- ~~Scroll x Tap issue;~~
+- ~~When filtering by categories, open it in a new fragment;~~
 - Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
-- Cards with images;
+- New card layout;
 - Tablet adapter (full post);
 - Double press to exit;
 - AdMob;
 - Filter patrocinated posts (?);
 - Widget (v2 only);
+- Save and share buttons at ViewImageFragment;
+- Finish up layout for ViewImageFragment;
