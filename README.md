@@ -23,3 +23,4 @@ It's basically a single open-source RSS feed reader for your own blog.
 - Save and share buttons at ViewImageFragment;
 - Finish up layout for ViewImageFragment;
 - Share and comments button on WebView;
+- Fix endless scroll.
