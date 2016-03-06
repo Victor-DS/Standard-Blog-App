@@ -73,7 +73,7 @@ public class PublicationsList extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        publicationListFragment.sync();
+//        publicationListFragment.sync();
     }
     //endregion
 
@@ -86,10 +86,12 @@ public class PublicationsList extends AppCompatActivity
             return;
         }
 
-        if (doubleBackToExitPressedOnce) {
+        if (doubleBackToExitPressedOnce ||
+                getSupportFragmentManager().getBackStackEntryCount() > 0) {
             super.onBackPressed();
             return;
         }
+
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, R.string.double_press_to_exit, Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
