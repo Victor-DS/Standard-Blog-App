@@ -1,7 +1,9 @@
 package app.blog.standard.standardblogapp.controller.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -244,8 +246,11 @@ public class DefaultWebviewFragment extends Fragment {
     private class InnerWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            //TODO Open youtube videos on youtube app!
-            view.loadUrl(url);
+            if(url.contains("youtube.com") || url.contains("youtu.be")) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            } else {
+                view.loadUrl(url);
+            }
             return true;
         }
     }
