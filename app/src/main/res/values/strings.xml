@@ -4,6 +4,7 @@
     <!--<string name="app_name">Standard Blog App</string>-->
     <string name="feed_url">http://www.naosalvo.com.br/feed/</string>
     <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
+    <string name="share_publication_text">Vi um post no App do Nâo Salvo para Android </string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
     <!-- PublicationList -->

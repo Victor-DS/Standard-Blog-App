@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +36,9 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 /**
  * @author victor
  */
-public class DefaultWebviewFragment extends Fragment {
+public class DefaultWebviewFragment extends Fragment implements View.OnClickListener {
 
-    //TODO Comments and Share Button
-    //TODO Swipe to refresh layout
-
+    //region variables
     private WebView mWebView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean mIsWebViewAvailable;
@@ -44,7 +46,10 @@ public class DefaultWebviewFragment extends Fragment {
     private String url;
     private boolean isURL;
     private OnWebViewClickListener mListener;
+    private FloatingActionButton fabShare;
+    //endregion
 
+    //region constructors
     public static final DefaultWebviewFragment newInstance(Publication publication) {
         DefaultWebviewFragment oFragment = new DefaultWebviewFragment();
         Bundle oBundle = new Bundle(2);
@@ -62,10 +67,13 @@ public class DefaultWebviewFragment extends Fragment {
         oFragment.setArguments(oBundle);
         return oFragment;
     }
+    //endregion
 
+    //region Lifecycle Methods
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         publication = getArguments().getParcelable("publication");
         isURL = getArguments().getBoolean("isURL");
         url = getArguments().getString("url");
@@ -82,6 +90,9 @@ public class DefaultWebviewFragment extends Fragment {
         if (mWebView != null) {
             mWebView.destroy();
         }
+
+        fabShare = (FloatingActionButton) view.findViewById(R.id.fabShare);
+        fabShare.setOnClickListener(this);
 
         mWebView = (WebView) view.findViewById(R.id.idWebView);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.idWebViewRefresh);
@@ -168,17 +179,6 @@ public class DefaultWebviewFragment extends Fragment {
     }
 
     /**
-     * Convenience method for loading a url. Will fail if {@link View} is not initialised (but won't throw an {@link Exception})
-     *
-     * @param html
-     */
-    public void loadUrl(String html) {
-        if (mIsWebViewAvailable) getWebView().loadUrl(url = html);
-        else
-            Log.w("DefaultWebViewFragment", "WebView cannot be found. Check the view and fragment have been loaded.");
-    }
-
-    /**
      * Called when the fragment is visible to the user and actively running. Resumes the WebView.
      */
     @Override
@@ -234,6 +234,41 @@ public class DefaultWebviewFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+    //endregion
+
+    //region Menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.webview_options, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_comments:
+                mWebView.loadUrl(publication.getComments());
+                break;
+
+            case R.id.action_web:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl())));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    //endregion
+
+    //region Helper methods
+    /**
+     * Convenience method for loading a url. Will fail if {@link View} is not initialised (but won't throw an {@link Exception})
+     *
+     * @param html
+     */
+    public void loadUrl(String html) {
+        if (mIsWebViewAvailable) getWebView().loadUrl(url = html);
+        else
+            Log.w("DefaultWebViewFragment", "WebView cannot be found. Check the view and fragment have been loaded.");
+    }
 
     /**
      * Gets the WebView.
@@ -254,8 +289,29 @@ public class DefaultWebviewFragment extends Fragment {
             return true;
         }
     }
+    //endregion
+
+    //region Interaction methods
+    private void shareLink() {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getActivity()
+                .getString(R.string.share_publication_text) + mWebView.getUrl());
+        shareIntent.setType("text/plain");
+        startActivity(shareIntent);
+    }
 
     public interface OnWebViewClickListener {
         void onImageClicked(String url);
     }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.fabShare:
+                shareLink();
+                break;
+        }
+    }
+    //endregion
 }
