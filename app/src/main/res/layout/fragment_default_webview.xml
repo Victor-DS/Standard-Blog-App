@@ -28,8 +28,7 @@
             android:clickable="true"
             android:src="@android:drawable/ic_menu_share"
             app:layout_anchor="@id/idWebViewRefresh"
-            app:layout_anchorGravity="bottom|right|end"
-            app:fab_shadow="true"/>
+            app:layout_anchorGravity="bottom|right|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 
