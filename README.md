@@ -15,12 +15,14 @@ It's basically a single open-source RSS feed reader for your own blog.
 - ~~When filtering by categories, open it in a new fragment;~~
 - Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
 - New card layout;
-- Tablet adapter (full post);
+- Tablet adapter (full post) (?);
 - ~~Double press to exit;~~
 - AdMob;
 - Filter patrocinated posts (?);
 - Widget (v2 only);
 - Save and share buttons at ViewImageFragment;
-- Finish up layout for ViewImageFragment;
+- ~~Finish up layout for ViewImageFragment;~~
 - Share and comments button on WebView;
-- Fix endless scroll.
+- Fix endless scroll;
+- On iframe click, open in a new window?;
+- Give the user an option to view the image or follow the link on image click;
