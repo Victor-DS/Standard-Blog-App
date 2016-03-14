@@ -24,5 +24,5 @@ It's basically a single open-source RSS feed reader for your own blog.
 - ~~Finish up layout for ViewImageFragment;~~
 - Share and comments button on WebView;
 - Fix endless scroll;
-- On iframe click, open in a new window?;
+- On iframe click, open in ~~a new window~~ YT or FB?;
 - Give the user an option to view the image or follow the link on image click;
