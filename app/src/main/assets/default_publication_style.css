@@ -6,16 +6,17 @@ body {
 }
 
 h2 {
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 0px;
-}
-
-img {
-    margin-bottom: 5px;
 }
 
 p {
     text-align: justify;
+}
+
+img {
+    margin-bottom: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 iframe, img {
