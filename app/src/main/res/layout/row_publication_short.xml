@@ -40,6 +40,7 @@
                     android:text="SAMPLE TITLE"
                     android:textStyle="bold"
                     android:textSize="17sp"
+                    android:textColor="@color/gray_scale"
                     style="@style/Base.TextAppearance.AppCompat.Large" />
 
                 <TextView
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:text="SAMPLE DESCRIPTION"
                     android:textSize="14sp"
+                    android:textColor="@color/gray_scale"
                     style="@style/Base.TextAppearance.AppCompat.Medium" />
 
                 <TextView
@@ -57,6 +59,7 @@
                     android:text="SAMPLE TIME_AGO"
                     android:textSize="12sp"
                     android:textStyle="italic"
+                    android:textColor="@color/gray_scale"
                     style="@style/Base.TextAppearance.AppCompat.Small" />
 
             </android.support.v7.widget.LinearLayoutCompat>
