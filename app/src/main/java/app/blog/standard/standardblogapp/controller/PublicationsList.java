@@ -1,5 +1,6 @@
 package app.blog.standard.standardblogapp.controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFra
 import app.blog.standard.standardblogapp.controller.Fragments.ViewImageFragment;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
+import app.blog.standard.standardblogapp.model.util.Util;
 
 public class PublicationsList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -116,7 +118,14 @@ public class PublicationsList extends AppCompatActivity
                 break;
 
             case R.id.nav_about:
-                //TODO Open dialog
+                Util.openGenericDialog(this, R.string.action_about, R.string.about_message,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
                 break;
 
             case R.id.nav_share:
