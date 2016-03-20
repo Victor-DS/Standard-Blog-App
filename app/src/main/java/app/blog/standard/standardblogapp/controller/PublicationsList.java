@@ -1,6 +1,7 @@
 package app.blog.standard.standardblogapp.controller;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.Toast;
 
 import app.blog.standard.standardblogapp.R;
@@ -19,7 +21,6 @@ import app.blog.standard.standardblogapp.controller.Fragments.DefaultWebviewFrag
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.ViewImageFragment;
 import app.blog.standard.standardblogapp.model.Publication;
-import app.blog.standard.standardblogapp.model.util.NetworkHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 
 public class PublicationsList extends AppCompatActivity
@@ -56,9 +57,10 @@ public class PublicationsList extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
+        SubMenu subMenu = menu.getItem(6).getSubMenu();
 
         for(String category : publicationHelper.getAllCategories())
-            menu.add(category);
+            subMenu.add(category);
         //endregion
 
         publicationListFragment = PublicationListFragment.newInstance();
@@ -114,11 +116,27 @@ public class PublicationsList extends AppCompatActivity
                 break;
 
             case R.id.nav_about:
-
+                //TODO Open dialog
                 break;
 
             case R.id.nav_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,
+                        "https://play.google.com/store/apps/details?id=" + this.getPackageName());
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
 
+                break;
+
+            case R.id.nav_more_apps:
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://search?q=pub:Willy+Wonka")));
+                break;
+
+            case R.id.nav_rate:
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=" + this.getPackageName())));
                 break;
 
             case R.id.nav_settings:
