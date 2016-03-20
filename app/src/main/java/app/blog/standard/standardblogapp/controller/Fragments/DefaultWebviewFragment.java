@@ -36,7 +36,7 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 /**
  * @author victor
  */
-public class DefaultWebviewFragment extends Fragment implements View.OnClickListener {
+public class DefaultWebviewFragment extends Fragment {
 
     //region variables
     private WebView mWebView;
@@ -46,7 +46,6 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
     private String url;
     private boolean isURL;
     private OnWebViewClickListener mListener;
-    private FloatingActionButton fabShare;
     //endregion
 
     //region constructors
@@ -91,9 +90,6 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
             mWebView.destroy();
         }
 
-        fabShare = (FloatingActionButton) view.findViewById(R.id.fabShare);
-        fabShare.setOnClickListener(this);
-
         mWebView = (WebView) view.findViewById(R.id.idWebView);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.idWebViewRefresh);
         TypedValue typed_value = new TypedValue();
@@ -101,6 +97,12 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
                 typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources()
                 .getDimensionPixelSize(typed_value.resourceId));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mWebView.reload();
+            }
+        });
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
 
@@ -127,21 +129,6 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
                 swipeRefreshLayout.setRefreshing(true);
             }
         });
-//        mWebView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
-//
-//                //TODO Fix scroll problem
-//
-//                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
-//                    mListener.onImageClicked(hitTestResult.getExtra());
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//        });
         mWebView.setOnTouchListener(new HackyClickListener() {
             @Override
             public boolean OnClickListener() {
@@ -168,14 +155,10 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
         settings.setAppCachePath(getActivity().getCacheDir().getAbsolutePath());
         settings.setAllowFileAccess(true);
         settings.setAppCacheEnabled(true);
-//        int cacheMode = NetworkHelper.hasConnection(getActivity()) ? WebSettings.LOAD_DEFAULT :
-//                WebSettings.LOAD_CACHE_ELSE_NETWORK;
-//        settings.setCacheMode(cacheMode);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         settings.setJavaScriptEnabled(true);
 
         return view;
-//        return mWebView;
     }
 
     /**
@@ -251,10 +234,27 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.action_web:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl())));
+                String link = mWebView.getUrl().contains("<html>") ?
+                        publication.getUrl() : mWebView.getUrl();
+                getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+                break;
+
+            case R.id.action_share:
+                String linkToShare = mWebView.getUrl().contains("<html>") ?
+                        publication.getUrl() : mWebView.getUrl();
+                shareLink(linkToShare);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shareLink(String url) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getActivity()
+                .getString(R.string.share_publication_text) + url);
+        shareIntent.setType("text/plain");
+        startActivity(shareIntent);
     }
     //endregion
 
@@ -292,26 +292,8 @@ public class DefaultWebviewFragment extends Fragment implements View.OnClickList
     //endregion
 
     //region Interaction methods
-    private void shareLink() {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, getActivity()
-                .getString(R.string.share_publication_text) + mWebView.getUrl());
-        shareIntent.setType("text/plain");
-        startActivity(shareIntent);
-    }
-
     public interface OnWebViewClickListener {
         void onImageClicked(String url);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.fabShare:
-                shareLink();
-                break;
-        }
     }
     //endregion
 }

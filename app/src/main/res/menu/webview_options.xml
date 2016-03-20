@@ -3,15 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_share"
+        android:orderInCategory="102"
+        android:title="@string/share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_comments"
         android:orderInCategory="101"
         android:title="@string/comments_option"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_comments"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_web"
-        android:orderInCategory="102"
+        android:orderInCategory="100"
         android:title="@string/view_on_web_option"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_internet"
+        app:showAsAction="always" />
 
 </menu>
