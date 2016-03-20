@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 /**
+ * Helper class with generic useful methods.
+ *
  * @author victor
  */
 public class Util extends Application{
@@ -18,6 +20,12 @@ public class Util extends Application{
         application = this;
     }
 
+    /**
+     * Converts a Pixel value to Density Pixels.
+     *
+     * @param px Value in pixels you want to convert.
+     * @return Value in DPs.
+     */
     public static float pxToDp(float px) {
         return px / getContext().getResources().getDisplayMetrics().density;
     }
@@ -34,6 +42,17 @@ public class Util extends Application{
         adBuilder.setPositiveButton(android.R.string.ok, ok);
         AlertDialog adFinal = adBuilder.create();
         adFinal.show();
+    }
+
+    /**
+     * Method to be used in non-activity classes to get a String from resources
+     * without the need to pass a context around.
+     *
+     * @param stringId String identification (e.g.: R.string.name)
+     * @return Returns the String with that ID in the Strings' resource.
+     */
+    public static String getStringById(int stringId) {
+        return getContext().getResources().getString(stringId);
     }
 
 }
