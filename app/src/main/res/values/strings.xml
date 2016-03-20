@@ -9,6 +9,8 @@
         \n\nNão tenho qualquer relação com o blog, para qualquer contato:
         \nvdsantiago1@gmail.com
         \n\nGostou? Avalie o App no Google Play!</string>
+    <string name="image_folder_name">Não Salvo Imagens</string>
+    <string name="image_prefix">NS_</string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
     <!-- PublicationList -->
