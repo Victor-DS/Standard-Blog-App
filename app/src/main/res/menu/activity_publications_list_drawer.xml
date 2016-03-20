@@ -4,21 +4,31 @@
     <group>
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="@string/home" />
+            android:icon="@drawable/ic_home"
+            android:title="@string/action_home" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="@string/about" />
+            android:icon="@drawable/ic_information"
+            android:title="@string/action_about" />
+
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/ic_menu_rate_app"
+            android:title="@string/action_rate_app" />
+
+        <item
+            android:id="@+id/nav_more_apps"
+            android:icon="@drawable/ic_menu_more_apps"
+            android:title="@string/action_more_apps" />
 
         <item
             android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_share"
             android:title="Share" />
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_settings"
             android:title="@string/action_settings" />
     </group>
 
