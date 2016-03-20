@@ -5,6 +5,10 @@
     <string name="feed_url">http://www.naosalvo.com.br/feed/</string>
     <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
     <string name="share_publication_text">Vi um post no App do Nâo Salvo para Android: </string>
+    <string name="about_message">App feito de fã para fãs.
+        \n\nNão tenho qualquer relação com o blog, para qualquer contato:
+        \nvdsantiago1@gmail.com
+        \n\nGostou? Avalie o App no Google Play!</string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
     <!-- PublicationList -->
