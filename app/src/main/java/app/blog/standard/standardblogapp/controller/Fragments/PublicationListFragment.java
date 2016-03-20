@@ -32,7 +32,6 @@ import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 public class PublicationListFragment extends Fragment {
 
     //region variables
-
     private final String TAG = this.getClass().getSimpleName();
     private int CURRENT_SKIP = 0;
 
@@ -105,18 +104,23 @@ public class PublicationListFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(dy > 0) {
-                    visibleItemCount = mRecyclerView.getChildCount();
-                    totalItemCount = mLayoutManager.getItemCount();
-                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
-
-                    if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        Log.i(TAG, "Reached end of the list");
-                        aPublications.addAll(getNextPublications());
-
-                        mRecyclerView.getAdapter().notifyDataSetChanged();
-                    }
-                }
+                //FIXME This shit is bugged AF
+//                if(dy > 0) {
+//                    visibleItemCount = mRecyclerView.getChildCount();
+//                    totalItemCount = mLayoutManager.getItemCount();
+//                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+//
+//                    if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+//                        Log.i(TAG, "Reached end of the list");
+//                        aPublications.addAll(getNextPublications());
+//
+//                        mRecyclerView.getAdapter().notifyDataSetChanged();
+//                    }
+//                }
+//                if(!recyclerView.canScrollVertically(1)) {
+//                    aPublications.addAll(getNextPublications());
+//                    mRecyclerView.getAdapter().notifyDataSetChanged();
+//                }
             }
         });
 
