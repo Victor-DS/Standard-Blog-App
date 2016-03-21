@@ -4,6 +4,11 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+
+import app.blog.standard.standardblogapp.R;
 
 /**
  * Helper class with generic useful methods.
@@ -53,6 +58,33 @@ public class Util extends Application{
      */
     public static String getStringById(int stringId) {
         return getContext().getResources().getString(stringId);
+    }
+
+    /**
+     * Intent to open the official Facebook app. If the Facebook app is not installed then the
+     * default web browser will be used.</p>
+     *
+     * Example usage:</p>
+     * <code>newFacebookIntent("https://www.facebook.com/JRummyApps");</code></p>
+     *
+     * @param url
+     *            The full URL to the Facebook page or profile.
+     * @return An intent that will open the Facebook page/profile.
+     */
+    public static Intent newFacebookIntent(String url) {
+        Uri uri;
+        try {
+            getContext().getPackageManager().getPackageInfo("com.facebook.katana", 0);
+            // http://stackoverflow.com/a/24547437/1048340
+            uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+        } catch (PackageManager.NameNotFoundException e) {
+            uri = Uri.parse(url);
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    public static Intent getFBPageIntent() {
+        return newFacebookIntent(getStringById(R.string.fb_page_link));
     }
 
 }
