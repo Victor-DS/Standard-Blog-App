@@ -18,11 +18,11 @@ It's basically a single open-source RSS feed reader for your own blog.
 - Tablet adapter (full post) (?);
 - ~~Double press to exit;~~
 - AdMob;
-- Filter patrocinated posts (?);
+- Filter patrocinated posts;
 - Widget (v2 only);
-- Save and share buttons at ViewImageFragment;
+- ~~Save and share buttons at ViewImageFragment;~~
 - ~~Finish up layout for ViewImageFragment;~~
 - ~~Share and comments button on WebView;~~
-- Fix endless scroll;
+- ~~Fix endless scroll;~~ (Load all, for now.)
 - On iframe click, open in ~~a new window~~ YT or FB?;
 - Give the user an option to view the image or follow the link on image click;
