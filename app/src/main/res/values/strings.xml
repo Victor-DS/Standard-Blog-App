@@ -11,6 +11,7 @@
         \n\nGostou? Avalie o App no Google Play!</string>
     <string name="image_folder_name">Não Salvo Imagens</string>
     <string name="image_prefix">NS_</string>
+    <string name="fb_page_link">https://www.facebook.com/AppsAleatorios</string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
     <!-- PublicationList -->
@@ -36,6 +37,7 @@
     <string name="action_share">Share</string>
     <string name="action_settings">Settings</string>
     <string name="categories">Categories</string>
+    <string name="fb_link">Facebook</string>
 
 
     <!-- Strings related to Settings -->
