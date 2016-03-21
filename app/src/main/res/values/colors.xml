@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Blog's primary colors -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Header background color's -->
+    <color name="startColor">#449CDF</color>
+    <color name="centerColor">#A3D1F2</color>
+    <color name="endColor">#D9EDF8</color>
+
+    <!-- Text colors -->
     <color name="default_text_color">#000</color>
     <color name="gray_scale">#767676</color>
 </resources>
