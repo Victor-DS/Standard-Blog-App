@@ -58,6 +58,9 @@
     <!-- Fragment ViewImage -->
     <string name="save">Save</string>
     <string name="share">Share</string>
+    <string name="image_saved">Image saved successfully</string>
+    <string name="failed_to_save">Failed to save image</string>
+    <string name="share_image">Share image</string>
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>

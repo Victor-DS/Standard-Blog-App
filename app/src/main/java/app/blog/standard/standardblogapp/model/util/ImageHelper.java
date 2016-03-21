@@ -21,6 +21,12 @@ import app.blog.standard.standardblogapp.R;
  */
 public class ImageHelper {
 
+    /**
+     * Takes a Bitmap and save it as in a JPEG image, and returns its absolute path.
+     *
+     * @param bitmap Bitmap to be saved as image
+     * @return Image's path
+     */
     public static String saveImage(Bitmap bitmap) {
         String directory = Environment.getExternalStorageDirectory().getPath() +
                 "/" + Util.getStringById(R.string.image_folder_name) + "/";
@@ -39,7 +45,7 @@ public class ImageHelper {
             return null;
         }
 
-        Canvas canvas = new Canvas(bitmap);
+        Canvas canvas = new Canvas(bitmap.copy(Bitmap.Config.ARGB_8888, true));
 
         FileOutputStream output;
         try {

@@ -4,6 +4,8 @@ package app.blog.standard.standardblogapp.controller.Fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,20 +26,26 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import java.io.ByteArrayOutputStream;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.ImageHelper;
+import app.blog.standard.standardblogapp.model.util.Util;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewImageFragment extends Fragment {
+public class ViewImageFragment extends Fragment implements View.OnClickListener {
 
+    //region Variables
     private ImageView imageView;
     private ProgressBar progressBar;
     private PhotoViewAttacher mAttacher;
+    private LinearLayout llSave, llShare;
 
     private ImageLoader oImageLoader;
     private DisplayImageOptions oDisplayImageOptions;
+    //endregion
 
+    //region Constructors
     public static ViewImageFragment newInstance(String url) {
         ViewImageFragment oFragment = new ViewImageFragment();
 
@@ -54,7 +64,9 @@ public class ViewImageFragment extends Fragment {
                 .cacheOnDisk(true)
                 .build();
     }
+    //endregion
 
+    //region Lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +80,10 @@ public class ViewImageFragment extends Fragment {
         progressBar = (ProgressBar) view.findViewById(R.id.idProgressViewImage);
         imageView = (ImageView) view.findViewById(R.id.iv_photo);
         mAttacher = new PhotoViewAttacher(imageView);
+        llSave = (LinearLayout) view.findViewById(R.id.llSaveImage);
+        llSave.setOnClickListener(this);
+        llShare = (LinearLayout) view.findViewById(R.id.llShareImage);
+        llShare.setOnClickListener(this);
 
         final String url = getArguments().getString("url");
 
@@ -78,8 +94,7 @@ public class ViewImageFragment extends Fragment {
                         super.onLoadingCancelled(imageUri, view);
                         imageView.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
-                        //TODO Toast com mensagem de erro.
-                        //TODO Toque para tentar novamente.
+                        //TODO TextView: Error, tap to try again.
                     }
 
                     @Override
@@ -94,8 +109,7 @@ public class ViewImageFragment extends Fragment {
                         super.onLoadingFailed(imageUri, view, failReason);
                         imageView.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
-                        //TODO Toast com mensagem de erro.
-                        //TODO Toque para tentar novamente.
+                        //TODO TextView: Error, tap to try again.
                     }
 
                     @Override
@@ -108,5 +122,38 @@ public class ViewImageFragment extends Fragment {
 
         return view;
     }
+    //endregion
+
+    //region Clicks
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.llSaveImage:
+                if(ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
+                        .getBitmap()) != null)
+                    Toast.makeText(getActivity(), R.string.image_saved, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getActivity(), R.string.failed_to_save, Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.llShareImage:
+                String imagePath = ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
+                        .getBitmap());
+
+                if(imagePath == null) {
+                    Toast.makeText(getActivity(), R.string.failed_to_save, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("image/jpeg");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(imagePath));
+
+                startActivity(Intent.createChooser(shareIntent,
+                        Util.getStringById(R.string.share_image)));
+                break;
+        }
+    }
+    //endregion
 
 }
