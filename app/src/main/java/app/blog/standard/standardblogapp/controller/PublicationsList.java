@@ -59,7 +59,7 @@ public class PublicationsList extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
-        SubMenu subMenu = menu.getItem(6).getSubMenu();
+        SubMenu subMenu = menu.getItem(7).getSubMenu();
 
         for(String category : publicationHelper.getAllCategories())
             subMenu.add(category);
@@ -146,6 +146,10 @@ public class PublicationsList extends AppCompatActivity
             case R.id.nav_rate:
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("market://details?id=" + this.getPackageName())));
+                break;
+
+            case R.id.nav_fb_link:
+                startActivity(Util.getFBPageIntent());
                 break;
 
             case R.id.nav_settings:
