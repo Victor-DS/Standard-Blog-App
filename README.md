@@ -25,4 +25,5 @@ It's basically a single open-source RSS feed reader for your own blog.
 - ~~Share and comments button on WebView;~~
 - ~~Fix endless scroll;~~ (Load all, for now.)
 - On iframe click, open in ~~a new window~~ YT or FB?;
-- Give the user an option to view the image or follow the link on image click;
+- Give the user an option to view the image or follow the link on image click.
+- Open app from Web link;
