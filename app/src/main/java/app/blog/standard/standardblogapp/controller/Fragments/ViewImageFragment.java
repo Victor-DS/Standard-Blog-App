@@ -1,12 +1,14 @@
 package app.blog.standard.standardblogapp.controller.Fragments;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -129,11 +131,24 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.llSaveImage:
-                if(ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
-                        .getBitmap()) != null)
-                    Toast.makeText(getActivity(), R.string.image_saved, Toast.LENGTH_SHORT).show();
-                else
+                String path = ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
+                        .getBitmap());
+
+                if(path == null) {
                     Toast.makeText(getActivity(), R.string.failed_to_save, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                //If < KitKat
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        Uri.parse(path)));
+                //Else
+//                ContentValues values = new ContentValues();
+//                values.put(MediaStore.Images.Media.DATA,path);
+//                values.put(MediaStore.Images.Media.MIME_TYPE,"image/jpeg");
+//                getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+
+                Toast.makeText(getActivity(), R.string.image_saved, Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.llShareImage:
@@ -144,6 +159,9 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
                     Toast.makeText(getActivity(), R.string.failed_to_save, Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        Uri.parse(imagePath)));
 
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("image/jpeg");

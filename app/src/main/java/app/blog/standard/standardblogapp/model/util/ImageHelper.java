@@ -1,7 +1,9 @@
 package app.blog.standard.standardblogapp.model.util;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Environment;
 
 import java.io.File;
@@ -67,7 +69,7 @@ public class ImageHelper {
             return null;
         }
 
-        return filePath;
+        return "file://" + filePath;
     }
 
     /**
