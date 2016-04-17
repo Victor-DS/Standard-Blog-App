@@ -88,7 +88,8 @@ public class CategoriesDAO {
         ArrayList<Integer> publicationsId = new ArrayList<>();
 
         Cursor cursor = database.query(MyDatabaseHelper.TABLE_CATEGORIES_PER_POST,
-                allColumns, null, null, category, null, MyDatabaseHelper.COLUMN_POST_ID + " DESC");
+                allColumns, MyDatabaseHelper.COLUMN_CATEGORY+"=?", new String[] {category}, null,
+                null, MyDatabaseHelper.COLUMN_POST_ID + " DESC");
 
         cursor.moveToFirst();
 
