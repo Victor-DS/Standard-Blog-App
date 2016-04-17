@@ -167,12 +167,16 @@ public class PublicationListFragment extends Fragment {
         final int tempSkip = CURRENT_SKIP;
         CURRENT_SKIP += PublicationHelper.DEFAULT_PAGE_SIZE;
 
+        //FIXME Uncomment this and implement endless scroll!
+
         if(category == null) {
-            return publicationHelper.getAllPublicationsFromDatabase(tempSkip,
-                    PublicationHelper.DEFAULT_PAGE_SIZE);
+//            return publicationHelper.getAllPublicationsFromDatabase(tempSkip,
+//                    PublicationHelper.DEFAULT_PAGE_SIZE);
+            return publicationHelper.getAllPublicationsFromDatabase();
         } else {
-            return publicationHelper.getAllByCategory(category, tempSkip,
-                    PublicationHelper.DEFAULT_PAGE_SIZE);
+//            return publicationHelper.getAllByCategory(category, tempSkip,
+//                    PublicationHelper.DEFAULT_PAGE_SIZE);
+            return publicationHelper.getAllByCategory(category);
         }
     }
     //endregion
