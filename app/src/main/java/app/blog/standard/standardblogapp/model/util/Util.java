@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import java.util.Arrays;
+
 import app.blog.standard.standardblogapp.R;
 
 /**
@@ -85,6 +87,13 @@ public class Util extends Application{
 
     public static Intent getFBPageIntent() {
         return newFacebookIntent(getStringById(R.string.fb_page_link));
+    }
+
+    public static <T> T[] append(T[] arr, T element) {
+        final int N = arr.length;
+        arr = Arrays.copyOf(arr, N + 1);
+        arr[N] = element;
+        return arr;
     }
 
 }

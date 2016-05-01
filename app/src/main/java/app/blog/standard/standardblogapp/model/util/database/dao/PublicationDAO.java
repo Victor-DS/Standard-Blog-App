@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.database.MyDatabaseHelper;
 
 /**
@@ -46,9 +48,11 @@ public class PublicationDAO implements DAO<Publication> {
 
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
+        categoriesDAO.open();
     }
 
     public void close() {
+        categoriesDAO.close();
         dbHelper.close();
     }
 
@@ -70,17 +74,9 @@ public class PublicationDAO implements DAO<Publication> {
     }
 
     public boolean createAll(ArrayList<Publication> publications) {
-        try {
-            categoriesDAO.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
         while (!publications.isEmpty())
             create(publications.remove(0));
 
-        categoriesDAO.close();
         return true;
     }
 
@@ -111,6 +107,10 @@ public class PublicationDAO implements DAO<Publication> {
 
     @Override
     public ArrayList<Publication> readAll() {
+        return readAll(false);
+    }
+
+    public ArrayList<Publication> readAll(boolean includeAds) {
         ArrayList<Publication> publications = new ArrayList<>();
 
         Cursor cursor = database.query(MyDatabaseHelper.TABLE_PUBLICATIONS,
@@ -119,7 +119,9 @@ public class PublicationDAO implements DAO<Publication> {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            publications.add(cursorToPublication(cursor));
+            Publication publication = cursorToPublication(cursor);
+            if(includeAds || !publication.isPatrocinated())
+                publications.add(publication);
             cursor.moveToNext();
         }
 
@@ -172,6 +174,37 @@ public class PublicationDAO implements DAO<Publication> {
         return publications;
     }
 
+    public ArrayList<Publication> readAllByCategory(String category) { //FIXME Tudo errado.
+        ArrayList<Publication> publications = new ArrayList<>();
+        final String whereClause = MyDatabaseHelper.TABLE_PUBLICATIONS + "." +
+                MyDatabaseHelper.COLUMN_ID + "=";
+        final String whereEqualTo = MyDatabaseHelper.TABLE_CATEGORIES_PER_POST
+                + "." + MyDatabaseHelper.COLUMN_POST_ID;
+
+        String[] columns = allColumns;
+        columns = Util.append(columns, MyDatabaseHelper.TABLE_CATEGORIES_PER_POST + "." +
+                MyDatabaseHelper.COLUMN_POST_ID);
+
+        //SELECT columns FROM the two tables WHERE
+
+        Cursor cursor = database.query(MyDatabaseHelper.TABLE_PUBLICATIONS+ ", " +
+                MyDatabaseHelper.TABLE_CATEGORIES_PER_POST,
+                columns, whereClause + whereEqualTo, null, null, null,
+                MyDatabaseHelper.COLUMN_ID + " DESC", "1"); //FIXME Gambiarra!
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            publications.add(cursorToPublication(cursor));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+
+        return publications;
+    }
+
     @Override
     public boolean update(Publication publication) {
         return false;
@@ -186,6 +219,7 @@ public class PublicationDAO implements DAO<Publication> {
 
     private Publication cursorToPublication(Cursor cursor) {
         Publication publication = new Publication();
+        publication.setCategory(categoriesDAO.readAllCategoriesForPublication(cursor.getInt(0)));
         publication.setTitle(cursor.getString(1));
         publication.setUrl(cursor.getString(2));
         publication.setCreator(cursor.getString(3));

@@ -33,7 +33,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE `"+
             TABLE_CATEGORIES_PER_POST+"` (" +
-            "  `"+COLUMN_POST_ID+"` INTEGER," +
+            "  `"+COLUMN_POST_ID+"` INTEGER REFERENCES " + TABLE_PUBLICATIONS + "("+ COLUMN_ID + ")," +
             "  `"+COLUMN_CATEGORY+"` TEXT" +
             ");";
 
@@ -68,4 +68,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // create new tables
         onCreate(sqLiteDatabase);
     }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    //    @Override
+//    public void onOpen(SQLiteDatabase db) {
+//        super.onOpen(db);
+//
+//        if(!db.isReadOnly()) {
+//            db.execSQL("PRAGMA foreign_keys=ON;");
+//        }
+//    }
 }

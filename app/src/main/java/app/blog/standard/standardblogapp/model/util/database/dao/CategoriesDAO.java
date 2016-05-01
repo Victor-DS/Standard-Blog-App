@@ -124,4 +124,28 @@ public class CategoriesDAO {
         return publicationsId;
     }
 
+    public String[] readAllCategoriesForPublication(int id) {
+        Cursor cursor = database.query(MyDatabaseHelper.TABLE_CATEGORIES_PER_POST,
+                new String[] {MyDatabaseHelper.COLUMN_CATEGORY},
+                MyDatabaseHelper.COLUMN_POST_ID+"=?", new String[] {id+""}, null,
+                null, MyDatabaseHelper.COLUMN_CATEGORY + " DESC");
+
+        int nCategories = cursor.getCount();
+        int nCurrentCateogry = 0;
+
+        String[] categories = new String[nCategories];
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            categories[nCurrentCateogry] = cursor.getString(0);
+            nCurrentCateogry++;
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return categories;
+    }
+
 }

@@ -236,7 +236,9 @@ public class Publication implements Parcelable {
         date = (Date) objects[6];
     }
 
-    public boolean isPatrocinated() { //FIXME Null causes an exception!
+    public boolean isPatrocinated() {
+        if(this.category == null) return false;
+
         for(String cateogry : this.category)
             if(cateogry.toLowerCase()
                     .equals(Util.getStringById(R.string.patrocinated_cateogry).toLowerCase()))

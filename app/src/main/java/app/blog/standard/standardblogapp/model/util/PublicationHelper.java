@@ -115,8 +115,8 @@ public class PublicationHelper {
      *
      * @return An array of ALL publications stored in the database.
      */
-    public ArrayList<Publication> getAllPublicationsFromDatabase() {
-        return publicationDAO.readAll();
+    public ArrayList<Publication> getAllPublicationsFromDatabase(boolean includeAds) {
+        return publicationDAO.readAll(includeAds);
     }
 
     /**
@@ -130,12 +130,12 @@ public class PublicationHelper {
         return publicationDAO.read(skip, take);
     }
 
-    public int getNumberOfPublicationsSaved() {
-        return getAllPublicationsFromDatabase().size();
+    public int getNumberOfPublicationsSaved() { //FIXME Not efficient. AT ALL!
+        return getAllPublicationsFromDatabase(true).size();
     }
 
     public boolean hasPublications() {
-        return getNumberOfPublicationsSaved() > 0;
+        return getAllPublicationsFromDatabase(0, 5).size() > 0;
     }
 
     public String[] getAllCategories() {
@@ -143,6 +143,7 @@ public class PublicationHelper {
     }
 
     public ArrayList<Publication> getAllByCategory(String category) {
+//        return publicationDAO.readAllByCategory(category); //FIXME
         return publicationDAO.readAllById(categoriesDAO.readAllPublicationsByCategory(category));
     }
 
