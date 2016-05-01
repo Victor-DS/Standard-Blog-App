@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.controller;
+package app.blog.standard.standardblogapp.controller.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

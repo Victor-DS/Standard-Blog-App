@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.controller;
+package app.blog.standard.standardblogapp.controller.activities;
 
 
 import android.annotation.TargetApi;

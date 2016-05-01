@@ -172,7 +172,10 @@ public class PublicationListFragment extends Fragment {
         if(category == null) {
 //            return publicationHelper.getAllPublicationsFromDatabase(tempSkip,
 //                    PublicationHelper.DEFAULT_PAGE_SIZE);
-            return publicationHelper.getAllPublicationsFromDatabase();
+            //FIXME Does it matter if more than one app has the same SP name?
+            return publicationHelper.getAllPublicationsFromDatabase(
+                    getActivity().getSharedPreferences("BlogAppPreferences", Context.MODE_PRIVATE)
+                            .getBoolean("publicity_post", false));
         } else {
 //            return publicationHelper.getAllByCategory(category, tempSkip,
 //                    PublicationHelper.DEFAULT_PAGE_SIZE);

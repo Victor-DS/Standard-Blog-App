@@ -1,9 +1,8 @@
-package app.blog.standard.standardblogapp.controller;
+package app.blog.standard.standardblogapp.controller.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 
-public class PublicationsList extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         PublicationListFragment.OnListFragmentInteractionListener,
         DefaultWebviewFragment.OnWebViewClickListener {
