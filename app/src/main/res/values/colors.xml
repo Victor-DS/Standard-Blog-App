@@ -12,6 +12,6 @@
     <color name="endColor">#D9EDF8</color>
 
     <!-- Text colors -->
-    <color name="default_text_color">#000</color>
+    <color name="default_text_color">#404040</color>
     <color name="gray_scale">#767676</color>
 </resources>

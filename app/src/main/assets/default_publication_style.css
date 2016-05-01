@@ -7,7 +7,7 @@ body {
     max-width: 100%;
     padding: 1%;
     font-family: 'CustomFont';
-    line-height: 1.3;
+    line-height: 1.5;
 }
 
 h2 {
@@ -19,7 +19,7 @@ p {
 }
 
 h2, p {
-    color: #000;
+    color: <%TEXT_COLOR%>;
 }
 
 img {

@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.IOException;
 import java.io.InputStream;
 
+import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.Publication;
 
 /**
@@ -70,6 +71,9 @@ public class WebViewUtil {
         } catch(IOException e) {
             e.printStackTrace();
         }
+
+        model = model.replace("<%TEXT_COLOR%>",
+                Util.getStringById(R.color.default_text_color).replaceFirst("ff", ""));
         return model;
     }
 }
