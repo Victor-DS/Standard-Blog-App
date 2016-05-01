@@ -2,6 +2,7 @@ package app.blog.standard.standardblogapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Html;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -15,6 +16,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 
 /**
@@ -137,6 +140,10 @@ public class Publication implements Parcelable {
         return description;
     }
 
+    public String getDescriptionWithoutHTML() {
+        return Html.fromHtml(description).toString();
+    }
+
     public String getShortDescription(int nCharacters) {
         String shortDescription = description.substring(0, nCharacters);
         shortDescription = shortDescription.trim() + "...";
@@ -227,5 +234,14 @@ public class Publication implements Parcelable {
         description = WebViewUtil.prepareHTML((String) objects[4]);
         content = WebViewUtil.prepareHTML((String) objects[5]);
         date = (Date) objects[6];
+    }
+
+    public boolean isPatrocinated() { //FIXME Null causes an exception!
+        for(String cateogry : this.category)
+            if(cateogry.toLowerCase()
+                    .equals(Util.getStringById(R.string.patrocinated_cateogry).toLowerCase()))
+                return true;
+
+        return false;
     }
 }

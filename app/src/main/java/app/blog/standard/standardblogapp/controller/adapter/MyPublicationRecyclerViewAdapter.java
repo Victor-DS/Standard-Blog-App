@@ -2,15 +2,12 @@ package app.blog.standard.standardblogapp.controller.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -25,7 +22,6 @@ import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFra
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.TimeAgo;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPublicationRecyclerViewAdapter.ViewHolder> {
@@ -67,8 +63,9 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPub
         holder.mItem = mPublications.get(position);
         holder.mTitle.setText(mPublications.get(position).getTitle());
 
-        String description = Publication.trimTrailingWhitespace(
-                Html.fromHtml(mPublications.get(position).getShortDescription(150))).toString();
+//        String description = Publication.trimTrailingWhitespace(
+//                Html.fromHtml(mPublications.get(position).getShortDescription(150))).toString();
+        String description = mPublications.get(position).getDescriptionWithoutHTML();
 
         Log.i("Value description", description);
         holder.mDescription.setText(description);
