@@ -9,21 +9,15 @@ It's basically a single open-source RSS feed reader for your own blog.
 
 
 ## TODO
-- ~~Fix PhotoView Zoom out bug;~~
 - Background syncing;
-- ~~Scroll x Tap issue;~~
-- ~~When filtering by categories, open it in a new fragment;~~
 - Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
-- New card layout (Add preview image);
-- Tablet adapter (full post) (?);
-- ~~Double press to exit;~~
+- Final layout for Cards;
 - AdMob;
 - Filter patrocinated posts;
+- Fix settings.
+
+
+### Low priority OR v2
 - Widget (v2 only);
-- ~~Save and share buttons at ViewImageFragment;~~
-- ~~Finish up layout for ViewImageFragment;~~
-- ~~Share and comments button on WebView;~~
-- ~~Fix endless scroll;~~ (Load all, for now.)
-- On iframe click, open in ~~a new window~~ YT or FB?;
-- Give the user an option to view the image or follow the link on image click.
-- Open app from Web link;
+- Give the user an option to view the image or follow the link on image click (Low priority, maybe v2);
+- Open app from Web link (Low priority, since we're not parsing from the webpage and that would only take you to the app's main page and not the especific post, although we could do a search to find this post, but it may not be saved on the DB).
