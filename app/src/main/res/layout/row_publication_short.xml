@@ -60,6 +60,7 @@
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat blandit metus, non tincidunt risus tempor sit amet. Fusce semper ligula eget nibh pharetra, non luctus dolor condimentum. Praesent fermentum, ante nec interdum pellentesque, turpis dui ultrices tortor, id ullamcorper enim metus sed erat. Praesent blandit sit amet sem eget iaculis. Nullam eu lectus est. Sed ac erat in diam cursus accumsan. Praesent vulputate nulla eget suscipit feugiat. Curabitur vitae purus nec odio consequat mattis. Phasellus lorem ipsum, mattis nec ex vel, gravida mattis ante. Ut nibh tellus, rutrum vitae justo in, sollicitudin tempus eros"
                     android:textSize="14sp"
                     android:maxLines="3"
+                    android:ellipsize="end"
                     android:textColor="@color/default_text_color"
                     style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_below="@+id/textTitle"
