@@ -6,6 +6,9 @@ It's basically a single open-source RSS feed reader for your own blog.
 1. Set up **Android Studio** with the needed APIs.
 2. Import this project to the IDE.
 3. Go to *res/Strings.xml* and change the marked Strings as needed.
+4. Images can be changed by replacing the existing ones (DO NOT CHANGE THE NAME) on the *res/drawable-?dpi* folders.
+5. For further customization, you can also go to the *colors.xml* file to adequate it to your blog's colors.
+6. Before release, remember to set your own **applicationID**.
 
 
 ## TODO
