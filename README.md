@@ -17,7 +17,8 @@ It's basically a single open-source RSS feed reader for your own blog.
 - Final layout for Cards;
 - AdMob;
 - Filter patrocinated posts;
-- Fix settings.
+- Fix settings;
+- Icon color.
 
 
 ### Low priority OR v2
