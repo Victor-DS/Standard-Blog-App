@@ -74,6 +74,8 @@ public class WebViewUtil {
 
         model = model.replace("<%TEXT_COLOR%>",
                 Util.getStringById(R.color.default_text_color).replaceFirst("ff", ""));
+
+        model = model.replaceAll("src=\"//", "src=\"http://");
         return model;
     }
 }
