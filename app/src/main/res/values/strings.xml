@@ -15,6 +15,8 @@
     <string name="patrocinated_cateogry">PUBLI</string>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
+    <string name="new_posts_synced">There are new posts!</string>
+
     <!-- PublicationList -->
     <string name="double_press_to_exit">Press again to exit</string>
 
