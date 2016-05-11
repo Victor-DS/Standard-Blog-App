@@ -190,13 +190,40 @@ public class Publication implements Parcelable {
         this.url = url;
     }
 
-    public String getPublicationImage() { //No video icon for now...
+    public String getPublicationImage() {
         Document document = Jsoup.parse(this.content);
         Elements aElements = document.getElementsByTag("img");
 
-        if(aElements.isEmpty()) return null;
+        if(aElements.isEmpty()) {
+            if(hasYoutubeVideo())
+                return getYoutubeImageURL();
+            else
+                return null;
+        }
 
         return aElements.first().absUrl("abs:src");
+    }
+
+    public boolean hasYoutubeVideo() {
+        Document document = Jsoup.parse(this.content);
+        Elements aElements = document.getElementsByTag("iframe");
+
+        if(aElements.isEmpty()) return false;
+
+        return Util.stringContainsAnyOfThese(aElements.first().absUrl("abs:src"),
+                new String[] {"youtube.com", "youtu.be"});
+    }
+
+    public String getYoutubeImageURL() {
+        Document document = Jsoup.parse(this.content);
+        Elements aElements = document.getElementsByTag("iframe");
+
+        if(aElements.isEmpty() ||
+                !Util.stringContainsAnyOfThese(aElements.first().absUrl("abs:src"),
+                        new String[] {"youtube.com", "youtu.be"}))
+            return null;
+
+        return Util.getImageFromYTURL(aElements.first().absUrl("abs:src"));
     }
 
     @Override

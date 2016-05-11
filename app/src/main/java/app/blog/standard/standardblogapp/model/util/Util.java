@@ -2,15 +2,23 @@ package app.blog.standard.standardblogapp.model.util;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.controller.activities.MainActivity;
 
 /**
  * Helper class with generic useful methods.
@@ -94,6 +102,72 @@ public class Util extends Application{
         arr = Arrays.copyOf(arr, N + 1);
         arr[N] = element;
         return arr;
+    }
+
+    public static void sendNotification(int title, int message) {
+        Intent resultIntent = new Intent(getContext(), MainActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        int priority = NotificationCompat.PRIORITY_DEFAULT;
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getContext().getResources(),
+                        R.mipmap.ic_launcher))
+                .setContentTitle(getStringById(title))
+                .setContentText(getStringById(message))
+                .setOngoing(false)
+                .setPriority(priority)
+                .setVibrate(new long[0])
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(getStringById(message)))
+                .setContentIntent(resultPendingIntent);
+
+        NotificationManager nManager = (NotificationManager)
+                getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        nManager.notify(100, mBuilder.build());
+    }
+
+    public static void dismissNotification() {
+        NotificationManager nManager = (NotificationManager)
+                getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        nManager.cancel(100);
+    }
+
+    public static String youtubeImageURL(String videoID) {
+        return "http://img.youtube.com/vi/"+videoID+"/hqdefault.jpg";
+    }
+
+    public static String getIDFromYTURL(String URL) {
+        String pattern = "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|watch\\?" +
+                "v%3D|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*";
+
+        Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(URL);
+
+        if(matcher.find()){
+            return matcher.group();
+        }
+
+        return null;
+    }
+
+    public static String getImageFromYTURL(String URL) {
+        return youtubeImageURL(getIDFromYTURL(URL));
+    }
+
+    public static boolean stringContainsAnyOfThese(String original, String[] strings) {
+        for(String s : strings)
+            if(original.contains(s))
+                return true;
+
+        return false;
     }
 
 }
