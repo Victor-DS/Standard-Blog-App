@@ -12,17 +12,17 @@ It's basically a single open-source RSS feed reader for your own blog.
 
 
 ## TODO
-- Background syncing;
-- Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
-- Final layout for Cards;
-- AdMob;
-- Filter patrocinated posts;
-- Fix settings;
-- Icon color.
+- [ ] Background syncing;
+- [ ] Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
+- [x] Final layout for Cards;
+- [x] Filter patrocinated posts;
+- [ ] Fix settings;
+- [ ] Icon color.
 
 
 ### Low priority OR v2
 - Widget (v2 only);
 - Give the user an option to view the image or follow the link on image click (Low priority, maybe v2);
 - Open app from Web link (Low priority, since we're not parsing from the webpage and that would only take you to the app's main page and not the especific post, although we could do a search to find this post, but it may not be saved on the DB);
-- See also (Next unseen post).
+- See also (Next unseen post);
+- Admob
