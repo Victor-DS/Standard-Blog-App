@@ -21,6 +21,7 @@ import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.adapter.MyPublicationRecyclerViewAdapter;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.NetworkHelper;
+import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 
 /**
@@ -174,8 +175,7 @@ public class PublicationListFragment extends Fragment {
 //                    PublicationHelper.DEFAULT_PAGE_SIZE);
             //FIXME Does it matter if more than one app has the same SP name?
             return publicationHelper.getAllPublicationsFromDatabase(
-                    getActivity().getSharedPreferences("BlogAppPreferences", Context.MODE_PRIVATE)
-                            .getBoolean("publicity_post", false));
+                    PreferenceHelper.showPatrocinatedPosts());
         } else {
 //            return publicationHelper.getAllByCategory(category, tempSkip,
 //                    PublicationHelper.DEFAULT_PAGE_SIZE);

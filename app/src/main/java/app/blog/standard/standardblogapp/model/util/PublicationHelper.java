@@ -105,7 +105,6 @@ public class PublicationHelper {
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
 
-
         //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
         return response;
     }
@@ -116,7 +115,15 @@ public class PublicationHelper {
      * @return An array of ALL publications stored in the database.
      */
     public ArrayList<Publication> getAllPublicationsFromDatabase(boolean includeAds) {
-        return publicationDAO.readAll(includeAds);
+        ArrayList<Publication> publications = publicationDAO.readAll(includeAds);
+
+        //FIXME Not efficient
+        for(int i = 0; i < publications.size(); i++)
+            for(String s : publications.get(i).getCategory())
+                if(s.equals(Util.getStringById(R.string.patrocinated_cateogry)))
+                    publications.remove(i);
+
+        return publications;
     }
 
     /**
