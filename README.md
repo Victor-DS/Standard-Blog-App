@@ -16,7 +16,9 @@ It's basically a single open-source RSS feed reader for your own blog.
 - [ ] Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
 - [ ] Fix settings;
 - [ ] Icon color;
-- [ ] Google Analytics.
+- [ ] Google Analytics;
+- [ ] Replace OkHTTP w/ JSOUP (I don't need both for what I'm using);
+- [ ] Pass Headers to request to see if it fixes the *cache* problem. 
 
 
 ### Next Update
