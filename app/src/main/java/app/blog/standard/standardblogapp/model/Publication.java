@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.DateHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 
@@ -76,38 +77,11 @@ public class Publication implements Parcelable {
     }
 
     public void setDate(String sDate) {
-        DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
-        Date date = null;
-
-        try {
-            date = formatter.parse(sDate);
-        } catch (ParseException e) {
-            Log.e("Publication", "Error trying to parse the date string: " + sDate);
-            e.printStackTrace();
-        }
-
-        this.date = date;
+        this.date = DateHelper.timestampToDate(sDate);
     }
 
     public String getTimestamp() {
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return sdf.format(this.date);
-    }
-
-    public void setDateFromTimestamp(String timestamp) {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = null;
-
-        try {
-            date = formatter.parse(timestamp);
-        } catch (ParseException e) {
-            Log.e("Publication", "Error trying to parse the date string: " + timestamp);
-            e.printStackTrace();
-        }
-
-        this.date = date;
+        return DateHelper.dateToTimestamp(this.date);
     }
 
     public TimeAgo getHowLongAgo() {
@@ -120,21 +94,6 @@ public class Publication implements Parcelable {
 
         return new TimeAgo(days, TimeAgo.DAYS);
     }
-
-//    public static Map<TimeUnit,Long> computeDiff(Date date1, Date date2) {
-//        long diffInMillies = date2.getTime() - date1.getTime();
-//        List<TimeUnit> units = new ArrayList<TimeUnit>(EnumSet.allOf(TimeUnit.class));
-//        Collections.reverse(units);
-//        Map<TimeUnit,Long> result = new LinkedHashMap<TimeUnit,Long>();
-//        long milliesRest = diffInMillies;
-//        for ( TimeUnit unit : units ) {
-//            long diff = unit.convert(milliesRest,TimeUnit.MILLISECONDS);
-//            long diffInMilliesForUnit = unit.toMillis(diff);
-//            milliesRest = milliesRest - diffInMilliesForUnit;
-//            result.put(unit,diff);
-//        }
-//        return result;
-//    }
 
     public String getDescription() {
         return description;
