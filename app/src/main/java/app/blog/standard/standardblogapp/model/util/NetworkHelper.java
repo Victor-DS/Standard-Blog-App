@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class NetworkHelper {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
+
+        //FIXME PORQUE ESTÁ RETORNANDO ANTIGO????
 
         Response response = client.newCall(request).execute();
         return response.body().string();

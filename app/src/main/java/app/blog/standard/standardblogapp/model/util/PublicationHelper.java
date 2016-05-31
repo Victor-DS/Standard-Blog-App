@@ -105,6 +105,9 @@ public class PublicationHelper {
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
 
+        //TODO Adicionar add no DB aqui!
+        //Link: http://victor-ds.github.io/random/myAd.xml
+
         //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
         return response;
     }
@@ -163,4 +166,5 @@ public class PublicationHelper {
         publicationDAO.close();
         categoriesDAO.close();
     }
+
 }

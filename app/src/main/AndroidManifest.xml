@@ -39,9 +39,9 @@
             android:exported="true" />
 
         <receiver
-            android:name=".controller.service.SyncronizerStarter"
+            android:name=".controller.service.AlarmSync"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

@@ -19,12 +19,12 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_title_sync_frequency" />
 
-    <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_sync_keep_up_to_titles"
-        android:entryValues="@array/pref_sync_keep_up_to_values"
-        android:key="posts_to_keep"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="@string/pref_title_sync_keep_up_to" />
+    <!--<ListPreference-->
+        <!--android:defaultValue="-1"-->
+        <!--android:entries="@array/pref_sync_keep_up_to_titles"-->
+        <!--android:entryValues="@array/pref_sync_keep_up_to_values"-->
+        <!--android:key="posts_to_keep"-->
+        <!--android:negativeButtonText="@null"-->
+        <!--android:positiveButtonText="@null"-->
+        <!--android:title="@string/pref_title_sync_keep_up_to" />-->
 </PreferenceScreen>
