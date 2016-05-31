@@ -13,7 +13,7 @@ It's basically a single open-source RSS feed reader for your own blog.
 
 ## TODO
 - [ ] Background syncing;
-- [ ] Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
+- [x] Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);
 - [ ] Fix settings;
 - [ ] Icon color;
 - [ ] Google Analytics;
