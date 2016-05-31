@@ -1,46 +1,41 @@
 package app.blog.standard.standardblogapp.model.util;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-import java.io.IOException;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author victor
  */
 public class NetworkHelper {
 
-    private OkHttpClient client;
     private Context mContext;
     private NetworkInfo mNetworkInfo;
     private SharedPreferences mSharedPreferences;
 
     public NetworkHelper(Context mContext) {
         this.mContext = mContext;
-        this.client = new OkHttpClient();
         this.mNetworkInfo = ((ConnectivityManager) mContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
+    //FIXME Verify if it still returns a "cached" version
     public String run(String url) throws IOException {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+        Connection.Response res = Jsoup.connect(url)
+                .data("If-Modified-Since", DateHelper.dateToRSSString(new Date()))
+                .timeout(5000)
+                .execute();
 
-        //FIXME PORQUE ESTÁ RETORNANDO ANTIGO????
-
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return  res.body().toString();
     }
 
     //FIXME Returns if the user is connected to a network, not actually if that network has a connection.

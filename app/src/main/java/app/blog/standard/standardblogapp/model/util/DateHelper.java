@@ -23,6 +23,13 @@ public class DateHelper {
         return sdf.format(date);
     }
 
+    public static String dateToRSSString(Date date) {
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
+
+        return sdf.format(date);
+    }
+
     public static Date timestampToDate(String timestamp) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
