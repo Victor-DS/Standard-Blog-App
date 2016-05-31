@@ -27,6 +27,8 @@ import app.blog.standard.standardblogapp.controller.activities.MainActivity;
  */
 public class Util extends Application{
 
+    private final long NUMBER_OF_HOURS_BEFORE_AUTO_SYNC = 6;
+
     private static Application application;
 
     @Override
@@ -168,6 +170,15 @@ public class Util extends Application{
                 return true;
 
         return false;
+    }
+
+    public static boolean shouldSynchronizeAgain() {
+        String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
+                getContext().MODE_PRIVATE).getString("lastTimeSync", null);
+
+        if(timestamp == null) return true;
+
+        return DateHelper.numberOfHoursAgo(timestamp) >= NUMBER_OF_HOURS_BEFORE_AUTO_SYNC;
     }
 
 }
