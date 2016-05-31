@@ -186,4 +186,13 @@ public class Util extends Application{
         return DateHelper.numberOfHoursAgo(timestamp) >= NUMBER_OF_HOURS_BEFORE_AUTO_SYNC;
     }
 
+    public static Date getLastSyncDate() {
+        String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
+                getContext().MODE_PRIVATE).getString("lastTimeSync", null);
+
+        if(timestamp == null) return null;
+
+        return DateHelper.timestampToDate(timestamp);
+    }
+
 }
