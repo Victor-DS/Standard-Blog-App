@@ -19,7 +19,7 @@ It's basically a single open-source RSS feed reader for your own blog.
 - [ ] Google Analytics;
 - [ ] Replace OkHTTP w/ JSOUP (I don't need both for what I'm using);
 - [ ] Pass Headers to request to see if it fixes the *cache* problem;
-- [ ] "My Ads" complete with description and content, plus open link directly to Google Play;
+- [ ] "My Ads" ~~complete with description and content, plus~~ open link directly to Google Play;
 - [ ] Set ads to a different color;
 - [ ] Master detail on landscape. List of posts on the left, and post on the right.
 
