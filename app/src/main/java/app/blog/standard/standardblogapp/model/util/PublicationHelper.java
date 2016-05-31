@@ -24,6 +24,7 @@ public class PublicationHelper {
 
     private static PublicationHelper ourInstance;
 
+    private final String MY_AD_URL = "http://victor-ds.github.io/random/myAd.xml";
     public static final int DEFAULT_PAGE_SIZE = 10;
     private final String TAG = "PublicationHelper";
     private String FEED_URL;
@@ -105,11 +106,38 @@ public class PublicationHelper {
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
 
-        //TODO Adicionar add no DB aqui!
-        //Link: http://victor-ds.github.io/random/myAd.xml
+        Publication ad = getMyAds();
+        if(Util.getLastSyncDate() == null ||
+                ad.getDate().after(Util.getLastSyncDate()))
+            publicationDAO.create(ad);
 
         //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
         return response;
+    }
+
+    private Publication getMyAds() {
+        ArrayList<Publication> ads = new ArrayList<Publication>();
+
+        String feed = null;
+
+        try {
+            feed = mNetworkHelper.run(MY_AD_URL);
+        } catch (IOException e) {
+            Log.e(TAG, "Error trying to download ads.");
+            e.printStackTrace();
+        }
+
+        try {
+            ads.addAll(XMLParser.getPublicationsFromRSS(feed));
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Error parsing ads data.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Error with I/O on ads data.");
+        }
+
+        return ads.get(0);
     }
 
     /**
