@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +28,7 @@ import app.blog.standard.standardblogapp.controller.activities.MainActivity;
  */
 public class Util extends Application{
 
-    private final long NUMBER_OF_HOURS_BEFORE_AUTO_SYNC = 6;
+    private static final long NUMBER_OF_HOURS_BEFORE_AUTO_SYNC = 6;
 
     private static Application application;
 
@@ -176,7 +177,11 @@ public class Util extends Application{
         String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
                 getContext().MODE_PRIVATE).getString("lastTimeSync", null);
 
-        if(timestamp == null) return true;
+        if(timestamp == null) {
+            getContext().getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
+                    .edit().putString("lastTimeSync", DateHelper.dateToTimestamp(new Date())).commit();
+            return true;
+        }
 
         return DateHelper.numberOfHoursAgo(timestamp) >= NUMBER_OF_HOURS_BEFORE_AUTO_SYNC;
     }

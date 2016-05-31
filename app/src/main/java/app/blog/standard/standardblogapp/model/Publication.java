@@ -13,7 +13,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import app.blog.standard.standardblogapp.R;
@@ -77,11 +76,28 @@ public class Publication implements Parcelable {
     }
 
     public void setDate(String sDate) {
-        this.date = DateHelper.timestampToDate(sDate);
+        this.date = DateHelper.rssStringDateToDate(sDate);
     }
 
     public String getTimestamp() {
         return DateHelper.dateToTimestamp(this.date);
+    }
+
+    public void setDateFromTimestamp(String timestamp) {
+        //FIXME Weird bug. Doesn't work when calling the static method from DateHelper, but works just fine when I copy the exact same code here. Investigate further.
+//        DateHelper.timestampToDate(timestamp);
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+
+        try {
+            date = formatter.parse(timestamp);
+        } catch (ParseException e) {
+            Log.e("Publication", "Error trying to parse the date string: " + timestamp);
+            e.printStackTrace();
+        }
+
+        this.date = date;
     }
 
     public TimeAgo getHowLongAgo() {
@@ -94,6 +110,21 @@ public class Publication implements Parcelable {
 
         return new TimeAgo(days, TimeAgo.DAYS);
     }
+
+//    public static Map<TimeUnit,Long> computeDiff(Date date1, Date date2) {
+//        long diffInMillies = date2.getTime() - date1.getTime();
+//        List<TimeUnit> units = new ArrayList<TimeUnit>(EnumSet.allOf(TimeUnit.class));
+//        Collections.reverse(units);
+//        Map<TimeUnit,Long> result = new LinkedHashMap<TimeUnit,Long>();
+//        long milliesRest = diffInMillies;
+//        for ( TimeUnit unit : units ) {
+//            long diff = unit.convert(milliesRest,TimeUnit.MILLISECONDS);
+//            long diffInMilliesForUnit = unit.toMillis(diff);
+//            milliesRest = milliesRest - diffInMilliesForUnit;
+//            result.put(unit,diff);
+//        }
+//        return result;
+//    }
 
     public String getDescription() {
         return description;

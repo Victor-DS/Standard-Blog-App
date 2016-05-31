@@ -24,6 +24,20 @@ public class DateHelper {
     }
 
     public static Date timestampToDate(String timestamp) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+
+        try {
+            date = formatter.parse(timestamp);
+        } catch (ParseException e) {
+            Log.e("Publication", "Error trying to parse the date string: " + timestamp);
+            e.printStackTrace();
+        }
+
+        return date;
+    }
+
+    public static Date rssStringDateToDate(String timestamp) {
         DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
         Date date = null;
 

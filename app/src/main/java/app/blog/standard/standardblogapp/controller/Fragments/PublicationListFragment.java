@@ -23,6 +23,7 @@ import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.NetworkHelper;
 import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
+import app.blog.standard.standardblogapp.model.util.Util;
 
 /**
  * A fragment representing a list of Items.
@@ -84,8 +85,10 @@ public class PublicationListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_publication_list, container, false);
 
         Context context = view.getContext();
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+
         final LinearLayoutManager mLayoutManager;
 
         aPublications = getNextPublications();
@@ -139,7 +142,8 @@ public class PublicationListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(!publicationHelper.hasPublications() && networkHelper.hasPreferedConnection()) {
+        if((!publicationHelper.hasPublications() && networkHelper.hasPreferedConnection()) ||
+                (Util.shouldSynchronizeAgain() && networkHelper.hasConnection())) {
             CURRENT_SKIP = 0;
             new OnlineSync(getActivity()).execute();
         }
