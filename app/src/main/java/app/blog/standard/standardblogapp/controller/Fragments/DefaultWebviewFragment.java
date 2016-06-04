@@ -134,8 +134,7 @@ public class DefaultWebviewFragment extends Fragment {
             public boolean OnClickListener() {
                 WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
 
-                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE &&
-                        !hitTestResult.getExtra().toLowerCase().contains("facebook.com")) {
+                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
                     mListener.onImageClicked(hitTestResult.getExtra());
                     return true;
                 }
@@ -282,7 +281,8 @@ public class DefaultWebviewFragment extends Fragment {
     private class InnerWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(url.contains("youtube.com") || url.contains("youtu.be")) {
+            if(url.contains("youtube.com") || url.contains("youtu.be")
+                    || url.contains("market://")) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
             } else {
                 view.loadUrl(url);
