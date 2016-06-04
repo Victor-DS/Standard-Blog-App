@@ -134,7 +134,8 @@ public class DefaultWebviewFragment extends Fragment {
             public boolean OnClickListener() {
                 WebView.HitTestResult hitTestResult = mWebView.getHitTestResult();
 
-                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE) {
+                if(hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE &&
+                        !hitTestResult.getExtra().toLowerCase().contains("facebook.com")) {
                     mListener.onImageClicked(hitTestResult.getExtra());
                     return true;
                 }
