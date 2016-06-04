@@ -14,4 +14,8 @@
     <!-- Text colors -->
     <color name="default_text_color">#404040</color>
     <color name="gray_scale">#767676</color>
+
+    <!-- Publication Card -->
+    <color name="ad_background">#ffffb3</color>
+
 </resources>

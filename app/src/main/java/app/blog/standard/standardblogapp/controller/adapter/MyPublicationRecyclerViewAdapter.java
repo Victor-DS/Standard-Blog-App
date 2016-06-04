@@ -2,6 +2,7 @@ package app.blog.standard.standardblogapp.controller.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +71,9 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPub
         Log.i("Value description", description);
         holder.mDescription.setText(description);
 
+        if(mPublications.get(position).isPatrocinated())
+            holder.contentLayout.setBackgroundResource(R.color.ad_background);
+
         TimeAgo timeAgo = mPublications.get(position).getHowLongAgo();
         holder.mTimeAgo.setText(timeAgo.getTime() + " " +
                 mContext.getString(timeAgo.getStringInt()).trim());
@@ -135,6 +139,7 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPub
         public final TextView mDescription;
         public final TextView mTimeAgo;
         public final ImageView imageIcon;
+        public final LinearLayoutCompat contentLayout;
 //        public final ProgressBar progressBar;
         public Publication mItem;
 
@@ -145,6 +150,7 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<MyPub
             mDescription = (TextView) view.findViewById(R.id.textDescription);
             mTimeAgo = (TextView) view.findViewById(R.id.textTimeAgo);
             imageIcon = (ImageView) view.findViewById(R.id.imageViewCard);
+            contentLayout = (LinearLayoutCompat) view.findViewById(R.id.contentLayout);
 //            progressBar = (ProgressBar) view.findViewById(R.id.progressImage);
         }
 
