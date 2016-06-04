@@ -13,6 +13,9 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -20,6 +23,7 @@ import java.util.regex.Pattern;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.activities.MainActivity;
+import app.blog.standard.standardblogapp.model.Publication;
 
 /**
  * Helper class with generic useful methods.
@@ -177,13 +181,15 @@ public class Util extends Application{
         String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
                 getContext().MODE_PRIVATE).getString("lastTimeSync", null);
 
-        if(timestamp == null) {
-            getContext().getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
-                    .edit().putString("lastTimeSync", DateHelper.dateToTimestamp(new Date())).commit();
-            return true;
-        }
+        if(timestamp == null) return true;
 
         return DateHelper.numberOfHoursAgo(timestamp) >= NUMBER_OF_HOURS_BEFORE_AUTO_SYNC;
+    }
+
+    public static void hasSynced() {
+        getContext().getSharedPreferences("StandardBlogApp_SP",
+                getContext().MODE_PRIVATE).edit().putString("lastTimeSync",
+                DateHelper.dateToTimestamp(new Date())).commit();
     }
 
     public static Date getLastSyncDate() {
@@ -193,6 +199,17 @@ public class Util extends Application{
         if(timestamp == null) return null;
 
         return DateHelper.timestampToDate(timestamp);
+    }
+
+    public static void saveMyAd(String xml) {
+        getContext().getSharedPreferences("StandardBlogApp_SP",
+                getContext().MODE_PRIVATE).edit().putString("myAd", xml).commit();
+    }
+
+    public static Publication getMyAd() throws XmlPullParserException, IOException {
+        return XMLParser.getPublicationsFromRSS(getContext().
+                getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
+                .getString("myAd", null)).get(0);
     }
 
 }

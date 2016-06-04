@@ -106,38 +106,12 @@ public class PublicationHelper {
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
 
-        Publication ad = getMyAds();
-        if(Util.getLastSyncDate() == null ||
-                ad.getDate().after(Util.getLastSyncDate()))
-            publicationDAO.create(ad);
+        Util.saveMyAd(getMyAdXML());
+
+        Util.hasSynced();
 
         //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
         return response;
-    }
-
-    private Publication getMyAds() {
-        ArrayList<Publication> ads = new ArrayList<Publication>();
-
-        String feed = null;
-
-        try {
-            feed = mNetworkHelper.run(MY_AD_URL);
-        } catch (IOException e) {
-            Log.e(TAG, "Error trying to download ads.");
-            e.printStackTrace();
-        }
-
-        try {
-            ads.addAll(XMLParser.getPublicationsFromRSS(feed));
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            Log.e(TAG, "Error parsing ads data.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e(TAG, "Error with I/O on ads data.");
-        }
-
-        return ads.get(0);
     }
 
     /**
@@ -148,13 +122,13 @@ public class PublicationHelper {
     public ArrayList<Publication> getAllPublicationsFromDatabase(boolean includeAds) {
         ArrayList<Publication> publications = publicationDAO.readAll(includeAds);
 
-        //FIXME Not efficient
-        for(int i = 0; i < publications.size(); i++)
-            for(String s : publications.get(i).getCategory())
-                if(s.equals(Util.getStringById(R.string.patrocinated_cateogry)))
-                    publications.remove(i);
+        //FIXME Not efficient / Will probably remove the option to hide the ads.
+//        for(int i = 0; i < publications.size(); i++)
+//            for(String s : publications.get(i).getCategory())
+//                if(s.equals(Util.getStringById(R.string.patrocinated_cateogry)))
+//                    publications.remove(i);
 
-        return publications;
+        return addAd(publications);
     }
 
     /**
@@ -165,7 +139,9 @@ public class PublicationHelper {
      * @return
      */
     public ArrayList<Publication> getAllPublicationsFromDatabase(int skip, int take) {
-        return publicationDAO.read(skip, take);
+        ArrayList<Publication> publications = publicationDAO.read(skip, take);
+
+        return skip == 0 ? addAd(publications) : publications;
     }
 
     public int getNumberOfPublicationsSaved() { //FIXME Not efficient. AT ALL!
@@ -194,5 +170,34 @@ public class PublicationHelper {
         publicationDAO.close();
         categoriesDAO.close();
     }
+
+    //region MyAd
+    private String getMyAdXML() {
+        ArrayList<Publication> ads = new ArrayList<Publication>();
+
+        String feed = null;
+
+        try {
+            feed = mNetworkHelper.run(MY_AD_URL);
+        } catch (IOException e) {
+            Log.e(TAG, "Error trying to download ads.");
+            e.printStackTrace();
+        }
+
+        return feed;
+    }
+
+    private ArrayList<Publication> addAd(ArrayList<Publication> publications) {
+        try {
+            publications.add(0, Util.getMyAd());
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return publications;
+    }
+    //endregion
 
 }
