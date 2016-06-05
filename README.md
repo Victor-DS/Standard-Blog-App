@@ -14,14 +14,14 @@ It's basically a single open-source RSS feed reader for your own blog.
 ## TODO
 - [ ] Background syncing;
 - [x] ~~Sync when the app opens (only on the prefered connection and if the last sync was more than X hours);~~
-- [x] Fix settings;
+- [x] ~~Fix settings;~~
 - [ ] Icon color;
 - [ ] Google Analytics;
 - [x] ~~Replace OkHTTP w/ JSOUP (I don't need both for what I'm using);~~
 - [x] ~~Pass Headers to request to see if it fixes the *cache* problem;~~ (VERIFY)
 - [x] ~~"My Ads" complete with description and content, plus open link directly to Google Play;~~
 - [x] ~~Set ads to a different color;~~
-- [ ] Fix save image (show image in gallery).
+- [x] ~~Fix save image (show image in gallery).~~
 
 
 ### Next Update
