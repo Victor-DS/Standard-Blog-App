@@ -1,10 +1,15 @@
 package app.blog.standard.standardblogapp.model.util;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +44,7 @@ public class ImageHelper {
 
         if(!folder.exists()) folder.mkdirs();
 
-        File file = new File(folder, getFileName());
+        File file = new File(folder, fileName);
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -69,6 +74,8 @@ public class ImageHelper {
             return null;
         }
 
+        updateGalleryImage(filePath);
+
         return "file://" + filePath;
     }
 
@@ -84,6 +91,29 @@ public class ImageHelper {
         String date = dateFormat.format(new Date());
 
         return Util.getStringById(R.string.image_prefix) + date + "_" + randomNumber + ".jpg";
+    }
+
+    /**
+     * Updates the gallery so the user can access the image.
+     *
+     * @param filePath The image file path. (Without the file://)
+     */
+    private static void updateGalleryImage(final String filePath) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            MediaScannerConnection.scanFile(Util.getContext(), new String[] { filePath }, null,
+                    new MediaScannerConnection.OnScanCompletedListener() {
+
+                @Override
+                public void onScanCompleted(String s, Uri uri) {
+                    Log.i("ExternalStorage", "Scanned " + filePath + ":");
+                    Log.i("ExternalStorage", "-> uri=" + uri);
+                }
+            });
+        } else {
+            Util.getContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                    Uri.parse("file://" + filePath)));
+        }
+
     }
 
 }
