@@ -13,6 +13,12 @@
     <string name="image_prefix">NS_</string>
     <string name="fb_page_link">https://www.facebook.com/AppsAleatorios</string>
     <string name="patrocinated_cateogry">PUBLI</string>
+    <string name="admob_app_id">ca-app-pub-9977323179127163~9106699735</string>
+    <string name="native_ad_unit_id">ca-app-pub-9977323179127163/4397298534</string>
+    <string name="post_footer_remove"><![CDATA[<p><em>Para ver todos os posts completos acesse o <a rel="nofollow" href="http://www.naosalvo.com.br">Não Salvo</a>.</em></p>]]></string>
+    <!--Native ad template: L003-->
+    <!--Width: 280–1200 dp-->
+    <!--Height: 250–1200 dp-->
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
 
     <string name="new_posts_synced">There are new posts!</string>

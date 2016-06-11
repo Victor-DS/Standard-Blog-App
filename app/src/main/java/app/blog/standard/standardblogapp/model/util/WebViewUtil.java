@@ -13,17 +13,13 @@ import app.blog.standard.standardblogapp.model.Publication;
  */
 public class WebViewUtil {
 
-    //TODO Update to use this class
-
-    private static final String FOOTER = "<p><em>Para ver todos os posts completos acesse o <a rel=\"nofollow\" href=\"http://www.naosalvo.com.br\">Não Salvo</a>.</em></p>";
-
     public static String prepareHTML(String HTML) {
         return decodeHTML(removeFooter(HTML));
     }
 
 
     private static String removeFooter(String HTML) {
-        return HTML.replaceAll(FOOTER, "");
+        return HTML.replaceAll(Util.getStringById(R.string.post_footer_remove), "");
     }
 
     private static String decodeHTML(String HTML) {
