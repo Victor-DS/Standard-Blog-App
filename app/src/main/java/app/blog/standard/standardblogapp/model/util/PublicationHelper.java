@@ -3,17 +3,15 @@ package app.blog.standard.standardblogapp.model.util;
 import android.content.Context;
 import android.util.Log;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
 import app.blog.standard.standardblogapp.model.util.database.dao.CategoriesDAO;
 import app.blog.standard.standardblogapp.model.util.database.dao.PublicationDAO;
 
@@ -25,6 +23,8 @@ public class PublicationHelper {
     private static PublicationHelper ourInstance;
 
     private final String MY_AD_URL = "http://victor-ds.github.io/random/myAd.xml";
+    private final int ADS_EVERY_N_POSTS = 10;
+
     public static final int DEFAULT_PAGE_SIZE = 10;
     private final String TAG = "PublicationHelper";
     private String FEED_URL;
@@ -127,6 +127,25 @@ public class PublicationHelper {
 //            for(String s : publications.get(i).getCategory())
 //                if(s.equals(Util.getStringById(R.string.patrocinated_cateogry)))
 //                    publications.remove(i);
+
+        if(publications.size() > ADS_EVERY_N_POSTS) {
+            int nAds = publications.size() / ADS_EVERY_N_POSTS;
+
+            while(nAds > 0) {
+                Publication ad = new Publication();
+                AdFetcher adFetcher = new AdFetcher(Util.getStringById(R.string.native_ad_unit_id));
+                adFetcher.fetchAd(mContext);
+                ad.setAd(adFetcher);
+                publications.add(nAds * ADS_EVERY_N_POSTS, ad);
+                nAds--;
+            }
+        } else {
+            Publication ad = new Publication();
+            AdFetcher adFetcher = new AdFetcher(Util.getStringById(R.string.native_ad_unit_id));
+            adFetcher.fetchAd(mContext);
+            ad.setAd(adFetcher);
+            publications.add(ad);
+        }
 
         return addAd(publications);
     }

@@ -177,6 +177,7 @@ public class Util extends Application{
         return false;
     }
 
+    //region SharedPreferences
     public static boolean shouldSynchronizeAgain() {
         String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
                 getContext().MODE_PRIVATE).getString("lastTimeSync", null);
@@ -211,5 +212,6 @@ public class Util extends Application{
                 getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
                 .getString("myAd", null)).get(0);
     }
+    //endregion
 
 }

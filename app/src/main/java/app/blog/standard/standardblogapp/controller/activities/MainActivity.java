@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
+
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.DefaultWebviewFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         //endregion
 
+        MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
         publicationHelper = PublicationHelper.getInstance(this);
 
         //region drawer
@@ -72,12 +75,6 @@ public class MainActivity extends AppCompatActivity
                     .add(R.id.container, publicationListFragment)
                     .commit();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        publicationListFragment.sync();
     }
     //endregion
 

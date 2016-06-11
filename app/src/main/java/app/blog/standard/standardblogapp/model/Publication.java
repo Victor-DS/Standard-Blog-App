@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
 import app.blog.standard.standardblogapp.model.util.DateHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
@@ -24,6 +25,8 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
  * @author victor
  */
 public class Publication implements Parcelable {
+
+    private AdFetcher ad;
 
     private String title, url, comments, creator, category[], description, content;
     private Date date;
@@ -216,6 +219,32 @@ public class Publication implements Parcelable {
         return Util.getImageFromYTURL(aElements.first().absUrl("abs:src"));
     }
 
+    public boolean isPatrocinated() {
+        if(this.category == null) return false;
+
+        for(String cateogry : this.category)
+            if(cateogry.toLowerCase()
+                    .equals(Util.getStringById(R.string.patrocinated_cateogry).toLowerCase()))
+                return true;
+
+        return false;
+    }
+
+    //region NativeAds
+    public boolean hasNativeAds() {
+        return ad != null;
+    }
+
+    public void setAd(AdFetcher ad) {
+        this.ad = ad;
+    }
+
+    public AdFetcher getAd() {
+        return ad;
+    }
+    //endregion
+
+    //region Parcelable
     @Override
     public int describeContents() {
         return 0;
@@ -252,15 +281,5 @@ public class Publication implements Parcelable {
         content = WebViewUtil.prepareHTML((String) objects[5]);
         date = (Date) objects[6];
     }
-
-    public boolean isPatrocinated() {
-        if(this.category == null) return false;
-
-        for(String cateogry : this.category)
-            if(cateogry.toLowerCase()
-                    .equals(Util.getStringById(R.string.patrocinated_cateogry).toLowerCase()))
-                return true;
-
-        return false;
-    }
+    //endregion
 }
