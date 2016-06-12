@@ -165,6 +165,13 @@ public class PublicationListFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((Util) getActivity().getApplication()).track("Publication List");
+    }
+
     //endregion
 
     //region Publication list
@@ -194,6 +201,12 @@ public class PublicationListFragment extends Fragment {
      * @param category Category name, or null for ALL.
      */
     public void switchCategory(String category) {
+        ((Util) getActivity().getApplication()).sendEvent("Drawer Item Click", "Switch category");
+
+        ((Util) getActivity().getApplication())
+                .sendEvent("Category Selected", category);
+
+
         this.category = category;
         CURRENT_SKIP = 0;
 

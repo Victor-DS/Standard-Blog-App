@@ -110,11 +110,17 @@ public class MainActivity extends AppCompatActivity
 
         switch(item.getItemId()) {
             case R.id.nav_home:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "Home Button");
+
                 getSupportFragmentManager().popBackStack(null,
                         FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
 
             case R.id.nav_about:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "About Button");
+
                 Util.openGenericDialog(this, R.string.action_about, R.string.about_message,
                         new DialogInterface.OnClickListener() {
 
@@ -126,6 +132,9 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_share:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "Share App Button");
+
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_TEXT,
@@ -136,20 +145,32 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_more_apps:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "More Apps Button");
+
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("market://search?q=pub:Willy+Wonka")));
                 break;
 
             case R.id.nav_rate:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "Rate App Button");
+
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("market://details?id=" + this.getPackageName())));
                 break;
 
             case R.id.nav_fb_link:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "Facebook Link Button");
+
                 startActivity(Util.getFBPageIntent());
                 break;
 
             case R.id.nav_settings:
+                ((Util) getApplication())
+                        .sendEvent("Drawer Item Click", "Settings Button");
+
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
 

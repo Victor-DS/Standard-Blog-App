@@ -13,11 +13,16 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -211,6 +216,51 @@ public class Util extends Application{
         return XMLParser.getPublicationsFromRSS(getContext().
                 getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
                 .getString("myAd", null)).get(0);
+    }
+    //endregion
+
+    //region Google Analytics
+    /**
+     * Enum used to identify the tracker that needs to be used for tracking.
+     */
+    public enum TrackerName {
+        APP_TRACKER, // Tracker used only in this app.
+        GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
+    }
+
+    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
+
+    public synchronized Tracker getTracker(TrackerName trackerId) {
+        if (!mTrackers.containsKey(trackerId)) {
+
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            Tracker t = (trackerId == TrackerName.APP_TRACKER) ?
+                    analytics.newTracker(getString(R.string.app_tracking))
+                    : analytics.newTracker(getString(R.string.global_tracking));
+            mTrackers.put(trackerId, t);
+
+        }
+        return mTrackers.get(trackerId);
+    }
+
+    public void track(String screenname) {
+        Tracker t;
+        for(TrackerName trackerName : TrackerName.values()) {
+            t = getTracker(trackerName);
+            t.setScreenName(screenname);
+            t.send(new HitBuilders.ScreenViewBuilder().build());
+        }
+    }
+
+    public void sendEvent(String category, String action) {
+        Tracker t;
+        for(TrackerName trackerName : TrackerName.values()) {
+            t = getTracker(trackerName);
+            t.send(new HitBuilders.EventBuilder()
+                    .setAction(action)
+                    .setCategory(category)
+                    .build());
+        }
     }
     //endregion
 

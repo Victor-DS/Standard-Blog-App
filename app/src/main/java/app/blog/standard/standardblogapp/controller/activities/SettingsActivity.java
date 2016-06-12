@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.Util;
 
 import java.util.List;
 
@@ -194,5 +195,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((Util) getApplication()).track("Settings");
     }
 }

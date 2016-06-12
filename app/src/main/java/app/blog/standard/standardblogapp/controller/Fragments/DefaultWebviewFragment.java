@@ -31,6 +31,7 @@ import java.net.URL;
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.hacky.HackyClickListener;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 
 /**
@@ -175,8 +176,9 @@ public class DefaultWebviewFragment extends Fragment {
      */
     @Override
     public void onResume() {
-        mWebView.onResume();
         super.onResume();
+        mWebView.onResume();
+        ((Util) getActivity().getApplication()).track("Publication View");
     }
 
     /**
@@ -230,16 +232,25 @@ public class DefaultWebviewFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_comments:
+                ((Util) getActivity().getApplication())
+                        .sendEvent("Button click", "Comments");
+
                 mWebView.loadUrl(publication.getComments());
                 break;
 
             case R.id.action_web:
+                ((Util) getActivity().getApplication())
+                        .sendEvent("Button click", "View on Web");
+
                 String link = mWebView.getUrl().contains("<html>") ?
                         publication.getUrl() : mWebView.getUrl();
                 getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
                 break;
 
             case R.id.action_share:
+                ((Util) getActivity().getApplication())
+                        .sendEvent("Button click", "Share Publication");
+
                 String linkToShare = mWebView.getUrl().contains("<html>") ?
                         publication.getUrl() : mWebView.getUrl();
                 shareLink(linkToShare);

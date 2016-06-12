@@ -15,6 +15,8 @@
     <string name="admob_app_id" translatable="false"></string>
     <string name="native_ad_unit_id" translatable="false"></string>
     <string name="post_footer_remove" translatable="false">The post(.*)Le Ninja</string>
+    <string name="app_tracking" translatable="false">UA-38018123-8</string>
+    <string name="global_tracking" translatable="false">UA-38018123-19</string>
     <!--Native ad template: L003-->
     <!--Width: 280–1200 dp-->
     <!--Height: 250–1200 dp-->
