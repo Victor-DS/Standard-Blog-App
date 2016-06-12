@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Le Ninja</string>
+    <string name="view_on_web_option">Ver no navegador</string>
+    <string name="title_activity_settings">COnfigurações</string>
+    <string name="synchronizing">Sincronizando…</string>
+    <string name="share_publication_text">Vi um post no App do Le Ninja para Android:</string>
+    <string name="share_option">Compartilhar</string>
+    <string name="share_image">Compartilhar imagem</string>
+    <string name="share">Compartilhar</string>
+    <string name="save">Salvar</string>
+    <string name="pref_title_sync_keep_up_to">Manter até</string>
+    <string name="pref_title_sync_frequency">Frequência de sincronização</string>
+    <string name="pref_title_publicity">Posts publicitários</string>
+    <string name="pref_title_new_post_notification">Notificar sobre novos posts</string>
+    <string name="pref_title_mobile_data">Usar dados móveis</string>
+    <string name="pref_header_general">Publicações</string>
+    <string name="pref_header_data_sync"><![CDATA[Dados & sincronização]]></string>
+    <string name="pref_description_publicity">Mostrar posts marcados como publicidade (Funciona só se o Blog marcar corretamente)</string>
+    <string name="pref_description_new_post_notification">Mandar notificações quando terminar sincronização e tiver novos posts.</string>
+    <string name="pref_description_mobile_data">Usar dados móveis para sincronizar posts em background (Recomendado: Off)</string>
+    <string name="new_posts_synced">Tem posts novos!</string>
+    <string name="image_saved">Imagem salva com sucesso</string>
+    <string name="hours_ago">horas atrás</string>
+    <string name="failed_to_save">Falha ao salvar imagem</string>
+    <string name="double_press_to_exit">Pressione de novo para sair</string>
+    <string name="days_ago">dias atrás</string>
+    <string name="comments_option">Ver comentários</string>
+    <string name="categories">Categorias</string>
+    <string name="action_share">Compartilhar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_rate_app">Avalie este app</string>
+    <string name="action_more_apps">Mais apps</string>
+    <string name="action_home">Início</string>
+    <string name="action_about">Sobre</string>
+    <string name="about_message">App feito de fã para fãs.         \n\nNão tenho qualquer relação com o blog, para qualquer contato:         \nvdsantiago1@gmail.com         \n\nGostou? Avalie o App no Google Play!</string>
+</resources>
