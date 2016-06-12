@@ -15,8 +15,8 @@ It's basically a single open-source RSS feed reader for your own blog.
 - [ ] Background syncing;
 - [x] Icon color;
 - [ ] Google Analytics;
-- [ ] AdMob - Native Ads;
-- [ ] Translate Strings to Portuguese.
+- [ ] AdMob - Native Ads; (App Install)
+- [x] Translate Strings to Portuguese.
 
 
 ### Next Update
