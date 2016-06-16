@@ -1,7 +1,6 @@
 <resources>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
     <string name="app_name">Não Salvo</string>
-    <!--<string name="app_name">Não Salvo</string>-->
     <string name="feed_url" translatable="false">http://www.naosalvo.com.br/feed/</string>
     <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
     <string name="share_publication_text">Vi um post no App do Não Salvo para Android: </string>
@@ -18,6 +17,8 @@
     <string name="post_footer_remove" translatable="false"><![CDATA[<p><em>Para ver todos os posts completos acesse o (.*)Não Salvo</a>.</em></p>]]></string>
     <string name="app_tracking" translatable="false">UA-38018123-8</string>
     <string name="global_tracking" translatable="false">UA-38018123-19</string>
+    <string name="scheme">http</string>
+    <string name="host">www.naosalvo.com.br</string>
     <!--Native ad template: L003-->
     <!--Width: 280–1200 dp-->
     <!--Height: 250–1200 dp-->
