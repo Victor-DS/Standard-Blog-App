@@ -11,15 +11,13 @@ public class SyncResponse {
     public static final int ERROR_PARSING_DATA = 1;
     public static final int ERROR_ON_DATABASE = 2;
 
-    private boolean success;
     private int newPosts, errorType;
     private String message;
 
-    public SyncResponse(int errorType, String message, int newPosts, boolean success) {
+    public SyncResponse(int errorType, String message, int newPosts) {
         this.errorType = errorType;
         this.message = message;
         this.newPosts = newPosts;
-        this.success = success;
     }
 
     public SyncResponse() {
@@ -50,10 +48,8 @@ public class SyncResponse {
     }
 
     public boolean isSuccess() {
-        return success;
+        return errorType == NO_ERROR;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+    public boolean hasNewPosts() { return newPosts > 0; }
 }

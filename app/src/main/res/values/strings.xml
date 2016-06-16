@@ -1,20 +1,21 @@
 <resources>
     <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
-    <string name="app_name">Le Ninja</string>
-    <string name="feed_url" translatable="false">http://feeds.feedburner.com/leninjablog?format=xml</string>
-    <string name="blog_tagline" translatable="false">Bem vindo ao dojô mais lindo da cidade</string>
-    <string name="share_publication_text">Vi um post no App do Le Ninja para Android: </string>
+    <string name="app_name">Não Salvo</string>
+    <!--<string name="app_name">Não Salvo</string>-->
+    <string name="feed_url" translatable="false">http://www.naosalvo.com.br/feed/</string>
+    <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
+    <string name="share_publication_text">Vi um post no App do Não Salvo para Android: </string>
     <string name="about_message">App feito de fã para fãs.
         \n\nNão tenho qualquer relação com o blog, para qualquer contato:
         \nvdsantiago1@gmail.com
         \n\nGostou? Avalie o App no Google Play!</string>
-    <string name="image_folder_name" translatable="false">LeNinja Imagens</string>
-    <string name="image_prefix" translatable="false">LN_</string>
+    <string name="image_folder_name">Não Salvo Imagens</string>
+    <string name="image_prefix">NS_</string>
     <string name="fb_page_link" translatable="false">https://www.facebook.com/AppsAleatorios</string>
-    <string name="patrocinated_cateogry" translatable="false"></string>
-    <string name="admob_app_id" translatable="false"></string>
-    <string name="native_ad_unit_id" translatable="false"></string>
-    <string name="post_footer_remove" translatable="false">The post(.*)Le Ninja</string>
+    <string name="patrocinated_cateogry" translatable="false">PUBLI</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-9977323179127163~9106699735</string>
+    <string name="native_ad_unit_id" translatable="false">ca-app-pub-9977323179127163/4397298534</string>
+    <string name="post_footer_remove" translatable="false"><![CDATA[<p><em>Para ver todos os posts completos acesse o (.*)Não Salvo</a>.</em></p>]]></string>
     <string name="app_tracking" translatable="false">UA-38018123-8</string>
     <string name="global_tracking" translatable="false">UA-38018123-19</string>
     <!--Native ad template: L003-->
@@ -83,32 +84,16 @@
 
     <string name="pref_title_sync_frequency">Sync frequency</string>
     <string-array name="pref_sync_frequency_titles">
-        <item>1 hour</item>
-        <item>2 hours</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>12 hours</item>
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+        <item>Never</item>
     </string-array>
     <string-array name="pref_sync_frequency_values">
-        <item>1</item>
-        <item>2</item>
         <item>3</item>
-        <item>6</item>
-        <item>12</item>
-    </string-array>
-
-    <string name="pref_title_sync_keep_up_to">Keep up to</string>
-    <string-array name="pref_sync_keep_up_to_titles">
-        <item>250 posts</item>
-        <item>500 posts</item>
-        <item>1000 posts</item>
-        <item>Unlimited</item>
-    </string-array>
-    <string-array name="pref_sync_keep_up_to_values">
-        <item>250</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>-1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
     </string-array>
 
 </resources>

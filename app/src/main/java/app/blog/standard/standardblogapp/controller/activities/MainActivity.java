@@ -1,5 +1,8 @@
 package app.blog.standard.standardblogapp.controller.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,11 +22,17 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.MobileAds;
 
+import java.util.Calendar;
+
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.DefaultWebviewFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment;
 import app.blog.standard.standardblogapp.controller.Fragments.ViewImageFragment;
+import app.blog.standard.standardblogapp.controller.service.AlarmSync;
+import app.blog.standard.standardblogapp.controller.service.Syncronizer;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.util.AlarmHelper;
+import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 
@@ -52,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
         publicationHelper = PublicationHelper.getInstance(this);
 
+        setUpAlarm();
+
         //region drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,6 +86,22 @@ public class MainActivity extends AppCompatActivity
                     .add(R.id.container, publicationListFragment)
                     .commit();
         }
+    }
+
+    private void setUpAlarm() {
+        if(AlarmHelper.getSyncInterval() == AlarmHelper.NEVER)
+            return;
+
+        Intent intent = new Intent(this, Syncronizer.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
+
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Calendar cal = Calendar.getInstance();
+
+        final long firstTime = AlarmHelper.getSyncInterval() + cal.getTimeInMillis();
+
+        alarm.setInexactRepeating(AlarmManager.RTC,
+                firstTime, AlarmHelper.getSyncInterval(), pendingIntent);
     }
     //endregion
 

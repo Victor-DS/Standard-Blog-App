@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.AlarmHelper;
+import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 
@@ -23,6 +25,11 @@ public class Syncronizer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //FIXME Shouldn't be called, but just in case...
+        if(PreferenceHelper.syncFrequency() == AlarmHelper.NEVER)
+            return;
+
         new Sync().execute();
     }
 
@@ -56,6 +63,10 @@ public class Syncronizer extends Service {
             super.onPostExecute(aBoolean);
             Util.dismissNotification();
 
+            if(aBoolean)
+                Util.hasSynced();
+
+            //TODO Update this!
             Util.sendNotification(R.string.app_name, R.string.new_posts_synced);
         }
 

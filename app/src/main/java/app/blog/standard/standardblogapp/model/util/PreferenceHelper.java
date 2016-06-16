@@ -14,13 +14,16 @@ import app.blog.standard.standardblogapp.model.TimeAgo;
  */
 public class PreferenceHelper {
 
+    //TODO Put all those SharedPreferences methods from Util here.
+
     public static boolean showPatrocinatedPosts() {
         return PreferenceManager.getDefaultSharedPreferences(Util.getContext())
                 .getBoolean("publicity_post", false);
     }
 
-    public static int syncInterval() {
-        return 6;
+    public static int syncFrequency() {
+        return PreferenceManager.getDefaultSharedPreferences(Util.getContext())
+                .getInt("sync_frequency", 2);
     }
 
     public static boolean shouldSync() {
