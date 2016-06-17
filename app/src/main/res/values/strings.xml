@@ -1,46 +1,4 @@
 <resources>
-    <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
-    <string name="app_name">Não Salvo</string>
-    <string name="feed_url" translatable="false">http://www.naosalvo.com.br/feed/</string>
-    <string name="blog_tagline">Entre o céu e o créu existem coisas que você nem imagina</string>
-    <string name="share_publication_text">Vi um post no App do Não Salvo para Android: </string>
-    <string name="about_message">App feito de fã para fãs.
-        \n\nNão tenho qualquer relação com o blog, para qualquer contato:
-        \nvdsantiago1@gmail.com
-        \n\nGostou? Avalie o App no Google Play!</string>
-    <string name="image_folder_name">Não Salvo Imagens</string>
-    <string name="image_prefix">NS_</string>
-    <string name="fb_page_link" translatable="false">https://www.facebook.com/AppsAleatorios</string>
-    <string name="patrocinated_cateogry" translatable="false">PUBLI</string>
-    <string name="admob_app_id" translatable="false">ca-app-pub-9977323179127163~9106699735</string>
-    <string name="native_ad_unit_id" translatable="false">ca-app-pub-9977323179127163/4397298534</string>
-    <string name="post_footer_remove" translatable="false"><![CDATA[<p><em>Para ver todos os posts completos acesse o (.*)Não Salvo</a>.</em></p>]]></string>
-    <string name="app_tracking" translatable="false">UA-38018123-8</string>
-    <string name="global_tracking" translatable="false">UA-38018123-19</string>
-    <string name="scheme">http</string>
-    <string name="host">www.naosalvo.com.br</string>
-    <!--Native ad template: L003-->
-    <!--Width: 280–1200 dp-->
-    <!--Height: 250–1200 dp-->
-    <!-- CHANGE THESE STRINGS TO CUSTOMIZE EACH APP -->
-
-    <string name="new_posts_synced">There are new posts!</string>
-
-    <!-- PublicationList -->
-    <string name="double_press_to_exit">Press again to exit</string>
-
-    <string name="synchronizing">Synchronizing&#8230;</string>
-
-    <!-- PublicationAdapter -->
-    <string name="hours_ago"> hours ago</string>
-    <string name="days_ago"> days ago</string>
-
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-
-
-    <string name="title_activity_settings">Settings</string>
-
     <!-- Drawer Menu -->
     <string name="action_home">Home</string>
     <string name="action_about">About</string>
@@ -51,23 +9,24 @@
     <string name="categories">Categories</string>
     <string name="fb_link" translatable="false">Facebook</string>
 
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
-    <!-- Strings related to Settings -->
-    <!-- Publication Fragment Settings -->
+
+    <!-- Notifications Sync -->
+    <string name="new_posts_synced">There are new posts!</string>
+    <string name="synchronizing">Synchronizing&#8230;</string>
+
+
+    <!-- PublicationList -->
+    <string name="double_press_to_exit">Press again to exit</string>
+
+
+    <!-- Default WebView Fragment -->
     <string name="share_option">Share</string>
     <string name="comments_option">View comments</string>
     <string name="view_on_web_option">View on web</string>
 
-    <!-- Publication settings (general) -->
-    <string name="pref_header_general">Publications</string>
-
-    <string name="pref_title_publicity">Marketing posts</string>
-    <string name="pref_description_publicity">Shows posts tagged as Marketing content
-        (Works only if it\'s properly tagged)</string>
-
-    <string name="pref_title_new_post_notification">Notify about new posts</string>
-    <string name="pref_description_new_post_notification">Sends you a notification when
-        synchronization is done, and there are new posts.</string>
 
     <!-- Fragment ViewImage -->
     <string name="save">Save</string>
@@ -76,7 +35,22 @@
     <string name="failed_to_save">Failed to save image</string>
     <string name="share_image">Share image</string>
 
-    <!-- Example settings for Data & Sync -->
+    <!-- PublicationAdapter -->
+    <string name="hours_ago"> hours ago</string>
+    <string name="days_ago"> days ago</string>
+
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings for Publications -->
+    <string name="pref_header_general">Publications</string>
+
+    <string name="pref_title_new_post_notification">Notify about new posts</string>
+    <string name="pref_description_new_post_notification">Sends you a notification when
+        synchronization is done, and there are new posts.</string>
+
+
+    <!-- Settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
     <string name="pref_title_mobile_data">Use mobile data</string>
