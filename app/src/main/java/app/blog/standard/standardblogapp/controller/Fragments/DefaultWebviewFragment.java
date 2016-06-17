@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -15,23 +14,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-
-import org.jsoup.Jsoup;
-
-import java.net.URL;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.hacky.HackyClickListener;
 import app.blog.standard.standardblogapp.model.Publication;
-import app.blog.standard.standardblogapp.model.util.Util;
+import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
 
 /**
@@ -178,7 +170,7 @@ public class DefaultWebviewFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mWebView.onResume();
-        ((Util) getActivity().getApplication()).track("Publication View");
+        GoogleAnalyticsHelper.track("Publication View");
     }
 
     /**
@@ -232,15 +224,13 @@ public class DefaultWebviewFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_comments:
-                ((Util) getActivity().getApplication())
-                        .sendEvent("Button click", "Comments");
+                GoogleAnalyticsHelper.sendEvent("Button click", "Comments");
 
                 mWebView.loadUrl(publication.getComments());
                 break;
 
             case R.id.action_web:
-                ((Util) getActivity().getApplication())
-                        .sendEvent("Button click", "View on Web");
+                GoogleAnalyticsHelper.sendEvent("Button click", "View on Web");
 
                 String link = mWebView.getUrl().contains("<html>") ?
                         publication.getUrl() : mWebView.getUrl();
@@ -248,8 +238,7 @@ public class DefaultWebviewFragment extends Fragment {
                 break;
 
             case R.id.action_share:
-                ((Util) getActivity().getApplication())
-                        .sendEvent("Button click", "Share Publication");
+                GoogleAnalyticsHelper.sendEvent("Button click", "Share Publication");
 
                 String linkToShare = mWebView.getUrl().contains("<html>") ?
                         publication.getUrl() : mWebView.getUrl();

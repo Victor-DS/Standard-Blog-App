@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import java.io.ByteArrayOutputStream;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
 import app.blog.standard.standardblogapp.model.util.ImageHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -129,7 +130,7 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onResume() {
         super.onResume();
-        ((Util) getActivity().getApplication()).track("Image View");
+        GoogleAnalyticsHelper.track("Image View");
     }
 
     //endregion
@@ -139,7 +140,7 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.llSaveImage:
-                ((Util) getActivity().getApplication()).sendEvent("Button click", "Save Image");
+                GoogleAnalyticsHelper.sendEvent("Button click", "Save Image");
 
                 final String path = ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
                         .getBitmap());
@@ -153,7 +154,7 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.llShareImage:
-                ((Util) getActivity().getApplication()).sendEvent("Button click", "Share Image");
+                GoogleAnalyticsHelper.sendEvent("Button click", "Share Image");
 
                 String imagePath = ImageHelper.saveImage(((BitmapDrawable) imageView.getDrawable())
                         .getBitmap());

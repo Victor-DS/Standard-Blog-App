@@ -32,6 +32,7 @@ import app.blog.standard.standardblogapp.controller.service.AlarmSync;
 import app.blog.standard.standardblogapp.controller.service.Syncronizer;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.util.AlarmHelper;
+import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
 import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
@@ -137,16 +138,14 @@ public class MainActivity extends AppCompatActivity
 
         switch(item.getItemId()) {
             case R.id.nav_home:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "Home Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Home Button");
 
                 getSupportFragmentManager().popBackStack(null,
                         FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
 
             case R.id.nav_about:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "About Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "About Button");
 
                 Util.openGenericDialog(this, R.string.action_about, R.string.about_message,
                         new DialogInterface.OnClickListener() {
@@ -159,8 +158,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_share:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "Share App Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Share App Button");
 
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
@@ -172,31 +170,27 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_more_apps:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "More Apps Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "More Apps Button");
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("market://search?q=pub:Willy+Wonka")));
                 break;
 
             case R.id.nav_rate:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "Rate App Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Rate App Button");
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("market://details?id=" + this.getPackageName())));
                 break;
 
             case R.id.nav_fb_link:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "Facebook Link Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Facebook Link Button");
 
                 startActivity(Util.getFBPageIntent());
                 break;
 
             case R.id.nav_settings:
-                ((Util) getApplication())
-                        .sendEvent("Drawer Item Click", "Settings Button");
+                GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Settings Button");
 
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;

@@ -64,7 +64,9 @@ public class Syncronizer extends Service {
             Util.dismissNotification();
 
             if(aBoolean)
-                Util.hasSynced();
+                PreferenceHelper.hasSynced();
+
+            //TODO Add Google Analytics
 
             //TODO Update this!
             Util.sendNotification(R.string.app_name, R.string.new_posts_synced);
@@ -76,7 +78,6 @@ public class Syncronizer extends Service {
             Util.dismissNotification();
         }
     }
-
     //endregion
 
 }

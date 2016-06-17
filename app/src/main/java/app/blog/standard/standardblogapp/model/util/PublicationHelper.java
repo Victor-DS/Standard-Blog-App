@@ -106,9 +106,9 @@ public class PublicationHelper {
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
 
-        Util.saveMyAd(getMyAdXML());
+        PreferenceHelper.saveMyAd(getMyAdXML());
 
-        Util.hasSynced();
+        PreferenceHelper.hasSynced();
 
         //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
         return response;
@@ -208,7 +208,7 @@ public class PublicationHelper {
 
     private ArrayList<Publication> addAd(ArrayList<Publication> publications) {
         try {
-            publications.add(0, Util.getMyAd());
+            publications.add(0, PreferenceHelper.getMyAd());
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {

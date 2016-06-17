@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.adapter.MyPublicationRecyclerViewAdapter;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
 import app.blog.standard.standardblogapp.model.util.NetworkHelper;
 import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
@@ -89,8 +90,6 @@ public class PublicationListFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
-        final LinearLayoutManager mLayoutManager;
-
         aPublications = getNextPublications();
 
         TypedValue typed_value = new TypedValue();
@@ -99,7 +98,6 @@ public class PublicationListFragment extends Fragment {
         swipeContainer.setProgressViewOffset(false, 0, getResources()
                 .getDimensionPixelSize(typed_value.resourceId));
 
-        mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setAdapter(new MyPublicationRecyclerViewAdapter(context,
                 aPublications, mListener));
         mRecyclerView.invalidate();
@@ -108,23 +106,6 @@ public class PublicationListFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                //FIXME This shit is bugged AF
-//                if(dy > 0) {
-//                    visibleItemCount = mRecyclerView.getChildCount();
-//                    totalItemCount = mLayoutManager.getItemCount();
-//                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
-//
-//                    if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-//                        Log.i(TAG, "Reached end of the list");
-//                        aPublications.addAll(getNextPublications());
-//
-//                        mRecyclerView.getAdapter().notifyDataSetChanged();
-//                    }
-//                }
-//                if(!recyclerView.canScrollVertically(1)) {
-//                    aPublications.addAll(getNextPublications());
-//                    mRecyclerView.getAdapter().notifyDataSetChanged();
-//                }
             }
         });
 
@@ -143,7 +124,7 @@ public class PublicationListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if((!publicationHelper.hasPublications() && networkHelper.hasPreferedConnection()) ||
-                (Util.shouldSynchronizeAgain() && networkHelper.hasConnection())) {
+                (PreferenceHelper.shouldSynchronizeAgain() && networkHelper.hasConnection())) {
             CURRENT_SKIP = 0;
             new OnlineSync(getActivity()).execute();
         }
@@ -169,7 +150,7 @@ public class PublicationListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((Util) getActivity().getApplication()).track("Publication List");
+        GoogleAnalyticsHelper.track("Publication List");
     }
 
     //endregion
@@ -201,10 +182,9 @@ public class PublicationListFragment extends Fragment {
      * @param category Category name, or null for ALL.
      */
     public void switchCategory(String category) {
-        ((Util) getActivity().getApplication()).sendEvent("Drawer Item Click", "Switch category");
+        GoogleAnalyticsHelper.sendEvent("Drawer Item Click", "Switch category");
 
-        ((Util) getActivity().getApplication())
-                .sendEvent("Category Selected", category);
+        GoogleAnalyticsHelper.sendEvent("Category Selected", category);
 
 
         this.category = category;

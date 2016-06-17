@@ -37,8 +37,6 @@ import app.blog.standard.standardblogapp.model.Publication;
  */
 public class Util extends Application{
 
-    private static final long NUMBER_OF_HOURS_BEFORE_AUTO_SYNC = 6;
-
     private static Application application;
 
     @Override
@@ -181,87 +179,5 @@ public class Util extends Application{
 
         return false;
     }
-
-    //region SharedPreferences
-    public static boolean shouldSynchronizeAgain() {
-        String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
-                getContext().MODE_PRIVATE).getString("lastTimeSync", null);
-
-        if(timestamp == null) return true;
-
-        return DateHelper.numberOfHoursAgo(timestamp) >= NUMBER_OF_HOURS_BEFORE_AUTO_SYNC;
-    }
-
-    public static void hasSynced() {
-        getContext().getSharedPreferences("StandardBlogApp_SP",
-                getContext().MODE_PRIVATE).edit().putString("lastTimeSync",
-                DateHelper.dateToTimestamp(new Date())).commit();
-    }
-
-    public static Date getLastSyncDate() {
-        String timestamp = getContext().getSharedPreferences("StandardBlogApp_SP",
-                getContext().MODE_PRIVATE).getString("lastTimeSync", null);
-
-        if(timestamp == null) return null;
-
-        return DateHelper.timestampToDate(timestamp);
-    }
-
-    public static void saveMyAd(String xml) {
-        getContext().getSharedPreferences("StandardBlogApp_SP",
-                getContext().MODE_PRIVATE).edit().putString("myAd", xml).commit();
-    }
-
-    public static Publication getMyAd() throws XmlPullParserException, IOException {
-        return XMLParser.getPublicationsFromRSS(getContext().
-                getSharedPreferences("StandardBlogApp_SP", getContext().MODE_PRIVATE)
-                .getString("myAd", null)).get(0);
-    }
-    //endregion
-
-    //region Google Analytics
-    /**
-     * Enum used to identify the tracker that needs to be used for tracking.
-     */
-    public enum TrackerName {
-        APP_TRACKER, // Tracker used only in this app.
-        GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
-    }
-
-    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
-
-    public synchronized Tracker getTracker(TrackerName trackerId) {
-        if (!mTrackers.containsKey(trackerId)) {
-
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker t = (trackerId == TrackerName.APP_TRACKER) ?
-                    analytics.newTracker(getString(R.string.app_tracking))
-                    : analytics.newTracker(getString(R.string.global_tracking));
-            mTrackers.put(trackerId, t);
-
-        }
-        return mTrackers.get(trackerId);
-    }
-
-    public void track(String screenname) {
-        Tracker t;
-        for(TrackerName trackerName : TrackerName.values()) {
-            t = getTracker(trackerName);
-            t.setScreenName(screenname);
-            t.send(new HitBuilders.ScreenViewBuilder().build());
-        }
-    }
-
-    public void sendEvent(String category, String action) {
-        Tracker t;
-        for(TrackerName trackerName : TrackerName.values()) {
-            t = getTracker(trackerName);
-            t.send(new HitBuilders.EventBuilder()
-                    .setAction(action)
-                    .setCategory(category)
-                    .build());
-        }
-    }
-    //endregion
 
 }
