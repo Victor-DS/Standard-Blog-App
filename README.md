@@ -12,7 +12,7 @@ It's basically a single open-source RSS feed reader for your own blog.
 
 
 ## TODO
-- [ ] Background syncing;
+- [x] ~~Background syncing;~~
 - [x] ~~Icon color;~~
 - [x] ~~Google Analytics;~~
 - [ ] AdMob - Native Ads; (App Install)
