@@ -14,16 +14,12 @@ import app.blog.standard.standardblogapp.model.Publication;
 public class WebViewUtil {
 
     public static String prepareHTML(String HTML) {
-        return decodeHTML(removeFooter(HTML));
+        return removeFooter(HTML);
     }
 
 
     private static String removeFooter(String HTML) {
         return HTML.replaceAll(Util.getStringById(R.string.post_footer_remove), "");
-    }
-
-    private static String decodeHTML(String HTML) {
-        return HTML; //TODO Decode HTML.
     }
 
     private static String getHTMLModel(Context mContext) throws IOException {

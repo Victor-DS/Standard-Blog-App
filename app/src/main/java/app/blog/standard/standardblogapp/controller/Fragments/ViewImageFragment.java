@@ -98,7 +98,6 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
                         super.onLoadingCancelled(imageUri, view);
                         imageView.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
-                        //TODO TextView: Error, tap to try again.
                     }
 
                     @Override
@@ -113,7 +112,6 @@ public class ViewImageFragment extends Fragment implements View.OnClickListener 
                         super.onLoadingFailed(imageUri, view, failReason);
                         imageView.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
-                        //TODO TextView: Error, tap to try again.
                     }
 
                     @Override

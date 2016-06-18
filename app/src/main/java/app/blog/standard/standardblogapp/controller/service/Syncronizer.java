@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 
 import app.blog.standard.standardblogapp.R;
+import app.blog.standard.standardblogapp.model.SyncResponse;
 import app.blog.standard.standardblogapp.model.util.AlarmHelper;
+import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
 import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
@@ -26,7 +28,6 @@ public class Syncronizer extends Service {
     public void onCreate() {
         super.onCreate();
 
-        //FIXME Shouldn't be called, but just in case...
         if(PreferenceHelper.syncFrequency() == AlarmHelper.NEVER)
             return;
 
@@ -40,9 +41,9 @@ public class Syncronizer extends Service {
     //endregion
 
     //Sync methods
-    private class Sync extends AsyncTask<Void, Void, Boolean> {
+    private class Sync extends AsyncTask<Void, Void, SyncResponse> {
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected SyncResponse doInBackground(Void... voids) {
             return PublicationHelper.getInstance(Util.getContext()).sync();
         }
 
@@ -59,22 +60,22 @@ public class Syncronizer extends Service {
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+        protected void onPostExecute(SyncResponse response) {
+            super.onPostExecute(response);
             Util.dismissNotification();
 
-            if(aBoolean)
+            if(response.isSuccess())
                 PreferenceHelper.hasSynced();
 
-            //TODO Add Google Analytics
-
-            //TODO Update this!
-            Util.sendNotification(R.string.app_name, R.string.new_posts_synced);
+            if(response.isSuccess() && response.hasNewPosts()) {
+                Util.sendNotification(R.string.app_name, R.string.new_posts_synced);
+                GoogleAnalyticsHelper.sendEvent("Background", "Notification new post");
+            }
         }
 
         @Override
-        protected void onCancelled(Boolean aBoolean) {
-            super.onCancelled(aBoolean);
+        protected void onCancelled(SyncResponse response) {
+            super.onCancelled(response);
             Util.dismissNotification();
         }
     }

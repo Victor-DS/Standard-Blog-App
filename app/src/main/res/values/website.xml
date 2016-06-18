@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Não Salvo</string>
-    <string name="feed_url" translatable="false">http://www.naosalvo.com.br/feed/</string>
+    <string name="app_name" translatable="false">Olé do Brasil</string>
+    <string name="feed_url" translatable="false">http://oledobrasil.com.br/feed/</string>
     <string name="blog_tagline" translatable="false">Entre o céu e o créu existem coisas que você nem imagina</string>
     <string name="share_publication_text" translatable="false">Vi um post no App do Não Salvo para Android: </string>
     <string name="about_message" translatable="false">App feito de fã para fãs.

@@ -28,7 +28,6 @@ public class NetworkHelper {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
-    //FIXME Verify if it still returns a "cached" version
     public String run(String url) throws IOException {
         Connection.Response res = Jsoup.connect(url)
                 .data("If-Modified-Since", DateHelper.dateToRSSString(new Date()))
@@ -38,12 +37,10 @@ public class NetworkHelper {
         return  res.body().toString();
     }
 
-    //FIXME Returns if the user is connected to a network, not actually if that network has a connection.
     public boolean hasConnection() {
         return mNetworkInfo != null && mNetworkInfo.isConnected();
     }
 
-    //FIXME Returns if the user is connected to a network, not actually if that network has a connection.
     public boolean hasWifiConnection() {
         return mNetworkInfo != null
                 && mNetworkInfo.isConnected()

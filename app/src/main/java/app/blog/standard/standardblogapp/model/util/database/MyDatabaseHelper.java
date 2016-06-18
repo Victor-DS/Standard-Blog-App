@@ -27,7 +27,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_POST_ID = "postId";
     public static final String COLUMN_CATEGORY = "category";
 
-    //TODO Update name?
     private static final String DB_NAME = "publications.db";
     private static final int DB_VERSION = 1;
 

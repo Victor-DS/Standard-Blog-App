@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.Publication;
+import app.blog.standard.standardblogapp.model.SyncResponse;
 import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
 import app.blog.standard.standardblogapp.model.util.database.dao.CategoriesDAO;
 import app.blog.standard.standardblogapp.model.util.database.dao.PublicationDAO;
@@ -56,7 +57,9 @@ public class PublicationHelper {
         FEED_URL = mContext.getString(R.string.feed_url);
     }
 
-    public boolean sync() {
+    public SyncResponse sync() {
+        int errorType = 0, newPosts = 0;
+
         String feed = null;
 
         try {
@@ -64,7 +67,7 @@ public class PublicationHelper {
         } catch (IOException e) {
             Log.e(TAG, "Error trying to download feed.");
             e.printStackTrace();
-            return false;
+            errorType = SyncResponse.ERROR_DOWNLOADING;
         }
 
         ArrayList<Publication> aPublications = new ArrayList<>();
@@ -74,15 +77,18 @@ public class PublicationHelper {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
             Log.e(TAG, "Error parsing feed data.");
+            errorType = SyncResponse.ERROR_PARSING_DATA;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "Error with I/O on feed data.");
+            errorType = SyncResponse.ERROR_DOWNLOADING;
         }
 
         try {
             publicationDAO.open();
         } catch (SQLException e) {
             e.printStackTrace();
+            errorType = SyncResponse.ERROR_ON_DATABASE;
         }
 
         Publication latestSaved = publicationDAO.readLatest();
@@ -101,7 +107,7 @@ public class PublicationHelper {
         if(index > -1)
             aPublications.subList(index, aPublications.size()).clear();
 
-        boolean response = aPublications.size() > 0;
+        newPosts = aPublications.size();
 
         while(!aPublications.isEmpty())
                 publicationDAO.create(aPublications.remove(aPublications.size()-1));
@@ -110,8 +116,9 @@ public class PublicationHelper {
 
         PreferenceHelper.hasSynced();
 
-        //TODO Better response type! Should return if it went well and how many (if any) new posts were synced.
-        return response;
+        errorType = errorType == 0 ? errorType = SyncResponse.NO_ERROR : errorType;
+
+        return new SyncResponse(errorType, newPosts);
     }
 
     /**
@@ -122,7 +129,7 @@ public class PublicationHelper {
     public ArrayList<Publication> getAllPublicationsFromDatabase(boolean includeAds) {
         ArrayList<Publication> publications = publicationDAO.readAll(includeAds);
 
-        //FIXME Not efficient / Will probably remove the option to hide the ads.
+        //I'm not checking for patrocinated posts anymore, but I'll let it here for now.
 //        for(int i = 0; i < publications.size(); i++)
 //            for(String s : publications.get(i).getCategory())
 //                if(s.equals(Util.getStringById(R.string.patrocinated_cateogry)))
@@ -176,7 +183,6 @@ public class PublicationHelper {
     }
 
     public ArrayList<Publication> getAllByCategory(String category) {
-//        return publicationDAO.readAllByCategory(category); //FIXME
         return publicationDAO.readAllById(categoriesDAO.readAllPublicationsByCategory(category));
     }
 

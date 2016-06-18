@@ -160,12 +160,11 @@ public class PublicationListFragment extends Fragment {
         final int tempSkip = CURRENT_SKIP;
         CURRENT_SKIP += PublicationHelper.DEFAULT_PAGE_SIZE;
 
-        //FIXME Uncomment this and implement endless scroll!
+        //Uncomment for endlees scroll (Not fixed so far)
 
         if(category == null) {
 //            return publicationHelper.getAllPublicationsFromDatabase(tempSkip,
 //                    PublicationHelper.DEFAULT_PAGE_SIZE);
-            //FIXME Does it matter if more than one app has the same SP name?
             return publicationHelper.getAllPublicationsFromDatabase(
                     PreferenceHelper.showPatrocinatedPosts());
         } else {
@@ -232,7 +231,7 @@ public class PublicationListFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return publicationHelper.sync();
+            return publicationHelper.sync().isSuccess();
         }
 
         @Override

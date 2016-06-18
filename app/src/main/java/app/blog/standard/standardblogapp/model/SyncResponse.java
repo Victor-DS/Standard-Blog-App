@@ -7,16 +7,14 @@ public class SyncResponse {
 
     /** ERROR TYPES **/
     public static final int NO_ERROR = -1;
-    public static final int ERROR_DOWNLOADING = 0;
-    public static final int ERROR_PARSING_DATA = 1;
-    public static final int ERROR_ON_DATABASE = 2;
+    public static final int ERROR_DOWNLOADING = 1;
+    public static final int ERROR_PARSING_DATA = 2;
+    public static final int ERROR_ON_DATABASE = 3;
 
     private int newPosts, errorType;
-    private String message;
 
-    public SyncResponse(int errorType, String message, int newPosts) {
+    public SyncResponse(int errorType, int newPosts) {
         this.errorType = errorType;
-        this.message = message;
         this.newPosts = newPosts;
     }
 
@@ -29,14 +27,6 @@ public class SyncResponse {
 
     public void setErrorType(int errorType) {
         this.errorType = errorType;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public int getNewPosts() {
