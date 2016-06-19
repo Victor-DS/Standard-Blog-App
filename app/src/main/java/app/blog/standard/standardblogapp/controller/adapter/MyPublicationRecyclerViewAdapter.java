@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.ads.formats.NativeAppInstallAdView;
 import com.google.android.gms.ads.formats.NativeContentAdView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,15 +17,19 @@ import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment.OnListFragmentInteractionListener;
 import app.blog.standard.standardblogapp.controller.adapter.holders.PublicationViewHolder;
 import app.blog.standard.standardblogapp.model.Publication;
-import app.blog.standard.standardblogapp.model.ads.ContentAdViewHolder;
-import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
+import app.blog.standard.standardblogapp.model.advertisement.AppInstallAdViewHolder;
+import app.blog.standard.standardblogapp.model.advertisement.ContentAdViewHolder;
+import app.blog.standard.standardblogapp.model.advertisement.Holder;
+import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
 
 import java.util.ArrayList;
 
-public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyPublicationRecyclerViewAdapter
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int PUBLICATION = 0;
-    private final int AD = 1;
+    private final int AD_CONTENT = 1;
+    private final int AD_APP = 2;
 
     private final ArrayList<Publication> mPublications;
     private final OnListFragmentInteractionListener mListener;
@@ -33,7 +38,8 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     private ImageLoader oImageLoader;
     private DisplayImageOptions oDisplayImageOptions;
 
-    public MyPublicationRecyclerViewAdapter(Context context, ArrayList<Publication> items, OnListFragmentInteractionListener listener) {
+    public MyPublicationRecyclerViewAdapter(Context context, ArrayList<Publication> items,
+                                            OnListFragmentInteractionListener listener) {
         mPublications = items;
         mListener = listener;
         mContext = context;
@@ -53,15 +59,25 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == AD) {
+        if(viewType != PUBLICATION) {
             FrameLayout frameLayout = new FrameLayout(parent.getContext());
 
             LayoutInflater inflater = (LayoutInflater) parent.getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            NativeContentAdView adView = (NativeContentAdView) inflater
+
+            if(viewType == AD_APP) {
+                NativeAppInstallAdView adViewApp = (NativeAppInstallAdView) inflater
+                        .inflate(R.layout.row_native_ad_app, frameLayout, false);
+
+                AppInstallAdViewHolder holder = new AppInstallAdViewHolder(adViewApp);
+
+                return holder;
+            }
+
+            NativeContentAdView adViewContent = (NativeContentAdView) inflater
                     .inflate(R.layout.row_native_ad_content, frameLayout, false);
 
-            ContentAdViewHolder holder = new ContentAdViewHolder(adView);
+            ContentAdViewHolder holder = new ContentAdViewHolder(adViewContent);
 
             return holder;
         }
@@ -73,9 +89,10 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType() == AD) {
-            AdFetcher adFetcher = mPublications.get(position).getAd();
-            adFetcher.showAd((ContentAdViewHolder) holder);
+        if(holder.getItemViewType() == AD_CONTENT ||
+                holder.getItemViewType() == AD_APP) {
+            MultiAdFetcher adFetcher = mPublications.get(position).getAd();
+            adFetcher.showAd((Holder) holder);
             return;
         }
 
@@ -87,7 +104,10 @@ public class MyPublicationRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemViewType(int position) {
-        return mPublications.get(position).hasNativeAds() ? AD : PUBLICATION;
+        if(!mPublications.get(position).hasNativeAds())
+            return PUBLICATION;
+
+        return mPublications.get(position).getAd().isContentAd() ?AD_CONTENT : AD_APP;
     }
 
     @Override

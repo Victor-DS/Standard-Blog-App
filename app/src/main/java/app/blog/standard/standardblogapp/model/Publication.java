@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import app.blog.standard.standardblogapp.R;
-import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
+import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
 import app.blog.standard.standardblogapp.model.util.DateHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
@@ -26,7 +26,7 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
  */
 public class Publication implements Parcelable {
 
-    private AdFetcher ad;
+    private MultiAdFetcher ad;
 
     private String title, url, comments, creator, category[], description, content;
     private Date date;
@@ -235,11 +235,11 @@ public class Publication implements Parcelable {
         return ad != null;
     }
 
-    public void setAd(AdFetcher ad) {
+    public void setAd(MultiAdFetcher ad) {
         this.ad = ad;
     }
 
-    public AdFetcher getAd() {
+    public MultiAdFetcher getAd() {
         return ad;
     }
     //endregion

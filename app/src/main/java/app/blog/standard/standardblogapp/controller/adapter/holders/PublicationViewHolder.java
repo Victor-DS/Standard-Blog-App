@@ -32,7 +32,6 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
     public final TextView mTimeAgo;
     public final ImageView imageIcon;
     public final LinearLayoutCompat contentLayout;
-    public final NativeExpressAdView adView;
     public final CardView cardView;
     public Publication mItem;
 
@@ -44,7 +43,6 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
         mTimeAgo = (TextView) view.findViewById(R.id.textTimeAgo);
         imageIcon = (ImageView) view.findViewById(R.id.imageViewCard);
         contentLayout = (LinearLayoutCompat) view.findViewById(R.id.contentLayout);
-        adView = (NativeExpressAdView) view.findViewById(R.id.adView);
         cardView = (CardView) view.findViewById(R.id.cardView);
     }
 

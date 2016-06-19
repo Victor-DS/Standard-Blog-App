@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.ads;
+package app.blog.standard.standardblogapp.model.advertisement;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,12 +12,12 @@ import com.google.android.gms.ads.formats.NativeContentAdView;
 import java.util.List;
 
 import app.blog.standard.standardblogapp.R;
-import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
 
 /**
  * A class that creates, holds, and populates the view assets for a {@link NativeContentAd}.
  */
-public class ContentAdViewHolder extends RecyclerView.ViewHolder {
+public class ContentAdViewHolder extends RecyclerView.ViewHolder
+        implements Holder<NativeContentAd>{
     public NativeContentAdView mAdView;
 
     /**
@@ -41,10 +41,11 @@ public class ContentAdViewHolder extends RecyclerView.ViewHolder {
     /**
      * Populates the asset {@link View}s contained it the {@link NativeContentAdView} with data
      * from the {@link NativeContentAd} object. This method is invoked when an
-     * {@link AdFetcher} has successfully loaded a {@link NativeContentAd}.
+     * {@link ContentAdFetcher} has successfully loaded a {@link NativeContentAd}.
      *
      * @param contentAd the ad that is to be displayed
      */
+    @Override
     public void populateView(NativeContentAd contentAd) {
         ((TextView) mAdView.getHeadlineView()).setText(contentAd.getHeadline());
         ((TextView) mAdView.getBodyView()).setText(contentAd.getBody());
@@ -73,6 +74,7 @@ public class ContentAdViewHolder extends RecyclerView.ViewHolder {
     /**
      * Hides the {@link NativeContentAdView} used to display the native ad.
      */
+    @Override
     public void hideView() {
         mAdView.setVisibility(View.GONE);
     }

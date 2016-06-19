@@ -15,6 +15,6 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:context="app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment"
-        tools:listitem="@layout/row_publication" />
+        tools:listitem="@layout/row_publication_short" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

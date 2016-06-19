@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.SyncResponse;
-import app.blog.standard.standardblogapp.model.advertisement.AdFetcher;
+import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
 import app.blog.standard.standardblogapp.model.util.database.dao.CategoriesDAO;
 import app.blog.standard.standardblogapp.model.util.database.dao.PublicationDAO;
 
@@ -140,7 +140,8 @@ public class PublicationHelper {
 
             while(nAds > 0) {
                 Publication ad = new Publication();
-                AdFetcher adFetcher = new AdFetcher(Util.getStringById(R.string.native_ad_unit_id));
+                MultiAdFetcher adFetcher = new MultiAdFetcher(
+                        Util.getStringById(R.string.native_ad_unit_id));
                 adFetcher.fetchAd(mContext);
                 ad.setAd(adFetcher);
                 publications.add(nAds * ADS_EVERY_N_POSTS, ad);
@@ -148,7 +149,8 @@ public class PublicationHelper {
             }
         } else {
             Publication ad = new Publication();
-            AdFetcher adFetcher = new AdFetcher(Util.getStringById(R.string.native_ad_unit_id));
+            MultiAdFetcher adFetcher = new MultiAdFetcher(
+                    Util.getStringById(R.string.native_ad_unit_id));
             adFetcher.fetchAd(mContext);
             ad.setAd(adFetcher);
             publications.add(ad);

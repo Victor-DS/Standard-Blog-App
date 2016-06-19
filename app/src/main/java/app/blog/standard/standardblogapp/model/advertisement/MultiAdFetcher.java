@@ -6,42 +6,34 @@ import android.util.Log;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.google.android.gms.ads.formats.NativeContentAd;
-
-import app.blog.standard.standardblogapp.model.ads.ContentAdViewHolder;
 
 /**
  * @author victor
  */
-public class AdFetcher {
-
-    private static AdFetcher instance;
+public class MultiAdFetcher implements Fetcher<Holder> {
 
     private final Object mSyncObject = new Object();
     private AdLoader mAdLoader;
     private String mAdUnitId;
+    private NativeAppInstallAd mAppAd;
     private NativeContentAd mContentAd;
-    private ContentAdViewHolder mViewHolder;
 
-    /**
-     * Creates an {@link AdFetcher}.
-     *
-     * @param adUnitId The ad unit ID used to request ads.
-     */
-    public AdFetcher(String adUnitId) {
+    public MultiAdFetcher(String adUnitId) {
         this.mAdUnitId = adUnitId;
     }
 
+    @Override
     public void fetchAd(Context context) {
         synchronized (mSyncObject) {
             if ((mAdLoader != null) && mAdLoader.isLoading()) {
-                Log.d(this.getClass().getName(), "ContentAdFetcher is already loading an ad.");
+                Log.d(this.getClass().getName(), "MultiAdFetcher is already loading an ad.");
                 return;
             }
 
             // If an ad previously loaded, do nothing.
-            if (mContentAd != null) {
+            if (mContentAd != null || mAppAd != null) {
                 return;
             }
 
@@ -52,9 +44,19 @@ public class AdFetcher {
                         }
                     };
 
+            NativeAppInstallAd.OnAppInstallAdLoadedListener appAdListener =
+                    new NativeAppInstallAd.OnAppInstallAdLoadedListener() {
+                        @Override
+                        public void onAppInstallAdLoaded(NativeAppInstallAd nativeAppInstallAd) {
+                            mAppAd = nativeAppInstallAd;
+                        }
+                    };
+
+
             if (mAdLoader == null) {
                 mAdLoader = new AdLoader.Builder(context, mAdUnitId)
                         .forContentAd(contentAdListener)
+                        .forAppInstallAd(appAdListener)
                         .withAdListener(new AdListener() {
                             @Override
                             public void onAdFailedToLoad(int errorCode) {
@@ -75,13 +77,17 @@ public class AdFetcher {
         }
     }
 
-    public void showAd(ContentAdViewHolder holder) {
-        if(mContentAd == null) {
+    @Override
+    public void showAd(Holder holder) {
+        if(mContentAd == null && mAppAd == null) {
             holder.hideView();
             return;
         }
 
-        holder.populateView(mContentAd);
+        holder.populateView(isContentAd() ? mContentAd : mAppAd);
     }
 
+    public boolean isContentAd() {
+        return mContentAd != null;
+    }
 }
