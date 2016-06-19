@@ -17,9 +17,9 @@ import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment.OnListFragmentInteractionListener;
 import app.blog.standard.standardblogapp.controller.adapter.holders.PublicationViewHolder;
 import app.blog.standard.standardblogapp.model.Publication;
-import app.blog.standard.standardblogapp.model.advertisement.AppInstallAdViewHolder;
-import app.blog.standard.standardblogapp.model.advertisement.ContentAdViewHolder;
-import app.blog.standard.standardblogapp.model.advertisement.Holder;
+import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
+import app.blog.standard.standardblogapp.controller.adapter.holders.ContentAdViewHolder;
+import app.blog.standard.standardblogapp.controller.adapter.holders.Holder;
 import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
 
 import java.util.ArrayList;

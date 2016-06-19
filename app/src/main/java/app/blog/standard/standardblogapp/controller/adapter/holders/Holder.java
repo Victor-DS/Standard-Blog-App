@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.advertisement;
+package app.blog.standard.standardblogapp.controller.adapter.holders;
 
 import com.google.android.gms.ads.formats.NativeContentAd;
 

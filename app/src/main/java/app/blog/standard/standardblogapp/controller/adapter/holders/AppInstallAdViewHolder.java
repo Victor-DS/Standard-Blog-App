@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.advertisement;
+package app.blog.standard.standardblogapp.controller.adapter.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

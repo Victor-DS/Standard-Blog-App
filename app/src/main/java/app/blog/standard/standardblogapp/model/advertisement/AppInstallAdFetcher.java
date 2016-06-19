@@ -7,7 +7,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
-import com.google.android.gms.ads.formats.NativeContentAd;
+
+import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
 
 /**
  * @author victor
