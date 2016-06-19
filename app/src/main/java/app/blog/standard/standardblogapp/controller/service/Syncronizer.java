@@ -9,6 +9,7 @@ import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.SyncResponse;
 import app.blog.standard.standardblogapp.model.util.AlarmHelper;
 import app.blog.standard.standardblogapp.model.util.GoogleAnalyticsHelper;
+import app.blog.standard.standardblogapp.model.util.NetworkHelper;
 import app.blog.standard.standardblogapp.model.util.PreferenceHelper;
 import app.blog.standard.standardblogapp.model.util.PublicationHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
@@ -28,7 +29,10 @@ public class Syncronizer extends Service {
     public void onCreate() {
         super.onCreate();
 
-        if(PreferenceHelper.syncFrequency() == AlarmHelper.NEVER)
+        NetworkHelper networkHelper = new NetworkHelper(this);
+
+        if(PreferenceHelper.syncFrequency() == AlarmHelper.NEVER ||
+                !networkHelper.hasPreferedConnection())
             return;
 
         new Sync().execute();
