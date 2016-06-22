@@ -26,7 +26,7 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
  */
 public class Publication implements Parcelable {
 
-    private MultiAdFetcher ad;
+    private boolean ad;
 
     private String title, url, comments, creator, category[], description, content;
     private Date date;
@@ -232,15 +232,11 @@ public class Publication implements Parcelable {
 
     //region NativeAds
     public boolean hasNativeAds() {
-        return ad != null;
-    }
-
-    public void setAd(MultiAdFetcher ad) {
-        this.ad = ad;
-    }
-
-    public MultiAdFetcher getAd() {
         return ad;
+    }
+
+    public void setAd() {
+        this.ad = true;
     }
     //endregion
 

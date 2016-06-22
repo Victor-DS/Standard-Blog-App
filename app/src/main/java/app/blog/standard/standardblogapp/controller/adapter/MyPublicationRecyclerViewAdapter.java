@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment.OnListFragmentInteractionListener;
+import app.blog.standard.standardblogapp.controller.adapter.holders.NativeExpressAdViewHolder;
 import app.blog.standard.standardblogapp.controller.adapter.holders.PublicationViewHolder;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
@@ -30,6 +31,7 @@ public class MyPublicationRecyclerViewAdapter
     private final int PUBLICATION = 0;
     private final int AD_CONTENT = 1;
     private final int AD_APP = 2;
+    private final int AD_EXPRESS = 1;
 
     private final ArrayList<Publication> mPublications;
     private final OnListFragmentInteractionListener mListener;
@@ -59,28 +61,40 @@ public class MyPublicationRecyclerViewAdapter
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType != PUBLICATION) {
-            FrameLayout frameLayout = new FrameLayout(parent.getContext());
+//        if(viewType != PUBLICATION) {
+//            FrameLayout frameLayout = new FrameLayout(parent.getContext());
+//
+//            LayoutInflater inflater = (LayoutInflater) parent.getContext()
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//            if(viewType == AD_APP) {
+//                NativeAppInstallAdView adViewApp = (NativeAppInstallAdView) inflater
+//                        .inflate(R.layout.row_native_ad_app, frameLayout, false);
+//
+//                AppInstallAdViewHolder holder = new AppInstallAdViewHolder(adViewApp);
+//
+//                return holder;
+//            }
+//
+//            NativeContentAdView adViewContent = (NativeContentAdView) inflater
+//                    .inflate(R.layout.row_native_ad_content, frameLayout, false);
+//
+//            ContentAdViewHolder holder = new ContentAdViewHolder(adViewContent);
+//
+//            return holder;
+//        }
 
-            LayoutInflater inflater = (LayoutInflater) parent.getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(viewType == AD_EXPRESS) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.row_native_ad_express,
+                            parent, false);
 
-            if(viewType == AD_APP) {
-                NativeAppInstallAdView adViewApp = (NativeAppInstallAdView) inflater
-                        .inflate(R.layout.row_native_ad_app, frameLayout, false);
-
-                AppInstallAdViewHolder holder = new AppInstallAdViewHolder(adViewApp);
-
-                return holder;
-            }
-
-            NativeContentAdView adViewContent = (NativeContentAdView) inflater
-                    .inflate(R.layout.row_native_ad_content, frameLayout, false);
-
-            ContentAdViewHolder holder = new ContentAdViewHolder(adViewContent);
+            NativeExpressAdViewHolder holder = new NativeExpressAdViewHolder(view);
+            holder.fetchAndPopulateAd();
 
             return holder;
         }
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_publication_short,
                         parent, false);
@@ -89,10 +103,14 @@ public class MyPublicationRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType() == AD_CONTENT ||
-                holder.getItemViewType() == AD_APP) {
-            MultiAdFetcher adFetcher = mPublications.get(position).getAd();
-            adFetcher.showAd((Holder) holder);
+//        if(holder.getItemViewType() == AD_CONTENT ||
+//                holder.getItemViewType() == AD_APP) {
+//            MultiAdFetcher adFetcher = mPublications.get(position).getAd();
+//            adFetcher.showAd((Holder) holder);
+//            return;
+//        }
+
+        if(holder.getItemViewType() == AD_EXPRESS) {
             return;
         }
 
@@ -107,7 +125,8 @@ public class MyPublicationRecyclerViewAdapter
         if(!mPublications.get(position).hasNativeAds())
             return PUBLICATION;
 
-        return mPublications.get(position).getAd().isContentAd() ?AD_CONTENT : AD_APP;
+        return AD_EXPRESS;
+//        return mPublications.get(position).getAd().isContentAd() ?AD_CONTENT : AD_APP;
     }
 
     @Override

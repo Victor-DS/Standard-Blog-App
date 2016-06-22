@@ -140,19 +140,19 @@ public class PublicationHelper {
 
             while(nAds > 0) {
                 Publication ad = new Publication();
-                MultiAdFetcher adFetcher = new MultiAdFetcher(
-                        Util.getStringById(R.string.native_ad_unit_id));
-                adFetcher.fetchAd(mContext);
-                ad.setAd(adFetcher);
+//                MultiAdFetcher adFetcher = new MultiAdFetcher(
+//                        Util.getStringById(R.string.native_ad_unit_id));
+//                adFetcher.fetchAd(mContext);
+                ad.setAd();
                 publications.add(nAds * ADS_EVERY_N_POSTS, ad);
                 nAds--;
             }
         } else {
             Publication ad = new Publication();
-            MultiAdFetcher adFetcher = new MultiAdFetcher(
-                    Util.getStringById(R.string.native_ad_unit_id));
-            adFetcher.fetchAd(mContext);
-            ad.setAd(adFetcher);
+//            MultiAdFetcher adFetcher = new MultiAdFetcher(
+//                    Util.getStringById(R.string.native_ad_unit_id));
+//            adFetcher.fetchAd(mContext);
+            ad.setAd();
             publications.add(ad);
         }
 
