@@ -11,14 +11,6 @@ It's basically a single open-source RSS feed reader for your own blog.
 6. Before release, remember to set your own **applicationID**.
 
 
-## TODO
-- [x] ~~Background syncing;~~
-- [x] ~~Icon color;~~
-- [x] ~~Google Analytics;~~
-- [ ] AdMob - Native Ads; (App Install)
-- [x] ~~Translate Strings to Portuguese.~~
-
-
 ### Next Update
 - Widget (v2 only);
 - Give the user an option to view the image or follow the link on image click;
