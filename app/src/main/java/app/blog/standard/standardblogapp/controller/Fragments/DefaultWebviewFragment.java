@@ -282,7 +282,7 @@ public class DefaultWebviewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if(url.contains("youtube.com") || url.contains("youtu.be")
-                    || url.contains("market://")) {
+                    || url.contains("market://") || url.endsWith(".apk")) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
             } else {
                 view.loadUrl(url);
