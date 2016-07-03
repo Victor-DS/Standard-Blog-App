@@ -1,20 +1,83 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "app.blog.standard.standardblogapp"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "Australia"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        oleDoBrasil {
+            applicationId "br.com.oledobrasil.nao.oficial"
+        }
+        naoSalvo {
+            applicationId "br.com.naosalvo.nao.oficial"
+        }
+        ahNegao {
+            applicationId "br.com.ahnegao.nao.oficial"
+        }
+        bobagento {
+            applicationId "com.bobagento.nao.oficial"
+        }
+        capinaremos {
+            applicationId "com.capinaremos.nao.oficial"
+        }
+        chongas {
+            applicationId "br.com.chongas.nao.oficial"
+        }
+        cogumeloLouco {
+            applicationId "com.cogumelolouco.nao.oficial"
+        }
+        failWars {
+            applicationId "br.blog.failwars.nao.oficial"
+        }
+        insoonia {
+            applicationId "com.insoonia.nao.oficial"
+        }
+        jacareBanguela {
+            applicationId "br.com.jacarebanguela.nao.oficial"
+        }
+        jesusManero {
+            applicationId "br.blog.jesusmanero.nao.oficial"
+        }
+        leNinja {
+            applicationId "br.com.leninja.nao.oficial"
+        }
+        memetizando {
+            applicationId "br.com.memetizando.nao.oficial"
+        }
+        naoIntendo {
+            applicationId "br.com.naointendo.nao.oficial"
+        }
+        naoMesmo {
+            applicationId "br.com.naomesmo.nao.oficial"
+        }
+        sedentario {
+            applicationId "org.sedentario.nao.oficial"
+        }
+        sensacionalista {
+            applicationId "br.com.sensacionalista.nao.oficial"
+        }
+        tenso {
+            applicationId "br.blog.tenso.nao.oficial"
+        }
+        trollando {
+            applicationId "com.trollando.nao.oficial"
+        }
+        versoDoInverso {
+            applicationId "br.com.oversodoinverso.nao.oficial"
         }
     }
 }
@@ -32,6 +95,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.google.android.gms:play-services-analytics:9.0.1'
     compile 'com.google.firebase:firebase-ads:9.0.1'
+    compile 'com.facebook.android:audience-network-sdk:4.8.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

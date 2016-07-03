@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.advertisement;
+package app.blog.standard.standardblogapp.model.admob;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,9 +6,7 @@ import android.util.Log;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.formats.NativeAppInstallAd;
 
-import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
 import app.blog.standard.standardblogapp.controller.adapter.holders.NativeExpressAdViewHolder;
 
 /**

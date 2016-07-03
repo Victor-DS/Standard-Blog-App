@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingBottom="1dp"
+    android:paddingTop="1dp">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="5dp"
+        style="@style/CardView.Light">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/contentLayout"
+            android:background="@color/ad_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <com.facebook.ads.MediaView
+                android:id="@+id/mediaView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp" >
+
+                <TextView
+                    android:id="@+id/adTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SAMPLE TITLE"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/default_text_color"
+                    style="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:id="@+id/adDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat blandit metus, non tincidunt risus tempor sit amet. Fusce semper ligula eget nibh pharetra, non luctus dolor condimentum. Praesent fermentum, ante nec interdum pellentesque, turpis dui ultrices tortor, id ullamcorper enim metus sed erat. Praesent blandit sit amet sem eget iaculis. Nullam eu lectus est. Sed ac erat in diam cursus accumsan. Praesent vulputate nulla eget suscipit feugiat. Curabitur vitae purus nec odio consequat mattis. Phasellus lorem ipsum, mattis nec ex vel, gravida mattis ante. Ut nibh tellus, rutrum vitae justo in, sollicitudin tempus eros"
+                    android:textSize="14sp"
+                    android:ellipsize="end"
+                    android:textColor="@color/default_text_color"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_below="@+id/textTitle"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:id="@+id/ivAdIcon" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Medium Text"
+                            android:textSize="12sp"
+                            android:textColor="@color/default_text_color"
+                            android:gravity="center_horizontal"
+                            android:id="@+id/tvSocialContext" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New Button"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/adButton" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

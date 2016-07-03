@@ -5,23 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.google.android.gms.ads.formats.NativeAppInstallAdView;
-import com.google.android.gms.ads.formats.NativeContentAdView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.controller.Fragments.PublicationListFragment.OnListFragmentInteractionListener;
+import app.blog.standard.standardblogapp.controller.adapter.holders.FacebookAdHolder;
+import app.blog.standard.standardblogapp.controller.adapter.holders.Holder;
 import app.blog.standard.standardblogapp.controller.adapter.holders.NativeExpressAdViewHolder;
 import app.blog.standard.standardblogapp.controller.adapter.holders.PublicationViewHolder;
 import app.blog.standard.standardblogapp.model.Publication;
-import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
-import app.blog.standard.standardblogapp.controller.adapter.holders.ContentAdViewHolder;
-import app.blog.standard.standardblogapp.controller.adapter.holders.Holder;
-import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
+import app.blog.standard.standardblogapp.model.facebookads.FacebookAdFetcher;
 
 import java.util.ArrayList;
 
@@ -86,11 +82,10 @@ public class MyPublicationRecyclerViewAdapter
 
         if(viewType == AD_EXPRESS) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.row_native_ad_express,
+                    .inflate(R.layout.row_facebook_ad,
                             parent, false);
 
-            NativeExpressAdViewHolder holder = new NativeExpressAdViewHolder(view);
-            holder.fetchAndPopulateAd();
+            FacebookAdHolder holder = new FacebookAdHolder(view);
 
             return holder;
         }
@@ -111,6 +106,8 @@ public class MyPublicationRecyclerViewAdapter
 //        }
 
         if(holder.getItemViewType() == AD_EXPRESS) {
+            FacebookAdFetcher adFetcher = mPublications.get(position).getAd();
+            adFetcher.showAd((Holder) holder);
             return;
         }
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import app.blog.standard.standardblogapp.R;
 import app.blog.standard.standardblogapp.model.Publication;
 import app.blog.standard.standardblogapp.model.SyncResponse;
-import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
+import app.blog.standard.standardblogapp.model.facebookads.FacebookAdFetcher;
 import app.blog.standard.standardblogapp.model.util.database.dao.CategoriesDAO;
 import app.blog.standard.standardblogapp.model.util.database.dao.PublicationDAO;
 
@@ -24,7 +24,7 @@ public class PublicationHelper {
     private static PublicationHelper ourInstance;
 
     private final String MY_AD_URL = "http://victor-ds.github.io/random/myAd.xml";
-    private final int ADS_EVERY_N_POSTS = 10;
+    private final int ADS_EVERY_N_POSTS = 5;
 
     public static final int DEFAULT_PAGE_SIZE = 10;
     private final String TAG = "PublicationHelper";
@@ -140,19 +140,19 @@ public class PublicationHelper {
 
             while(nAds > 0) {
                 Publication ad = new Publication();
-//                MultiAdFetcher adFetcher = new MultiAdFetcher(
-//                        Util.getStringById(R.string.native_ad_unit_id));
-//                adFetcher.fetchAd(mContext);
-                ad.setAd();
+                FacebookAdFetcher adFetcher = new FacebookAdFetcher(
+                        mContext.getString(R.string.fb_ad_id));
+                adFetcher.fetchAd(mContext);
+                ad.setAd(adFetcher);
                 publications.add(nAds * ADS_EVERY_N_POSTS, ad);
                 nAds--;
             }
         } else {
             Publication ad = new Publication();
-//            MultiAdFetcher adFetcher = new MultiAdFetcher(
-//                    Util.getStringById(R.string.native_ad_unit_id));
-//            adFetcher.fetchAd(mContext);
-            ad.setAd();
+            FacebookAdFetcher adFetcher = new FacebookAdFetcher(
+                    mContext.getString(R.string.fb_ad_id));
+            adFetcher.fetchAd(mContext);
+            ad.setAd(adFetcher);
             publications.add(ad);
         }
 

@@ -2,22 +2,25 @@
 <resources>
     <string name="app_name" translatable="false">Olé do Brasil</string>
     <string name="feed_url" translatable="false">http://oledobrasil.com.br/feed/</string>
-    <string name="blog_tagline" translatable="false">Entre o céu e o créu existem coisas que você nem imagina</string>
-    <string name="share_publication_text" translatable="false">Vi um post no App do Não Salvo para Android: </string>
+    <string name="blog_tagline" translatable="false"></string>
+    <string name="share_publication_text" translatable="false">Vi um post no App do Olé do Brasil para Android: </string>
     <string name="about_message" translatable="false">App feito de fã para fãs.
         \n\nNão tenho qualquer relação com o blog, para qualquer contato:
         \nvdsantiago1@gmail.com
         \n\nGostou? Avalie o App no Google Play!</string>
-    <string name="image_folder_name" translatable="false">Não Salvo Imagens</string>
-    <string name="image_prefix" translatable="false">NS_</string>
+    <string name="image_folder_name" translatable="false">Olé do Brasil Imagens</string>
+    <string name="image_prefix" translatable="false">OB_</string>
     <string name="fb_page_link" translatable="false">https://www.facebook.com/AppsAleatorios</string>
-    <string name="patrocinated_cateogry" translatable="false">PUBLI</string>
-    <string name="post_footer_remove" translatable="false"><![CDATA[<p><em>Para ver todos os posts completos acesse o (.*)Não Salvo</a>.</em></p>]]></string>
+    <string name="patrocinated_cateogry" translatable="false"></string>
+    <string name="post_footer_remove" translatable="false"></string>
 
-    <string name="admob_app_id" translatable="false">ca-app-pub-9977323179127163~9106699735</string>
-    <string name="native_ad_unit_id" translatable="false">ca-app-pub-9977323179127163/4397298534</string>
-    <string name="app_tracking" translatable="false">UA-38018123-8</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-9977323179127163~7374334133</string>
+    <string name="native_ad_unit_id" translatable="false">ca-app-pub-9977323179127163/1327800534</string>
+
+    <string name="app_tracking" translatable="false">UA-38018123-22</string>
     <string name="global_tracking" translatable="false">UA-38018123-19</string>
+    
+    <string name="fb_ad_id">1094535053952424_1094535457285717</string>
 
     <string name="scheme" translatable="false">http</string>
     <string name="host" translatable="false">www.naosalvo.com.br</string>

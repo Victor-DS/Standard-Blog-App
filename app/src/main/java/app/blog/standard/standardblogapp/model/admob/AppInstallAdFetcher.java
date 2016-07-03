@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.advertisement;
+package app.blog.standard.standardblogapp.model.admob;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,22 +7,26 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
-import com.google.android.gms.ads.formats.NativeContentAd;
 
-import app.blog.standard.standardblogapp.controller.adapter.holders.Holder;
+import app.blog.standard.standardblogapp.controller.adapter.holders.AppInstallAdViewHolder;
 
 /**
  * @author victor
  */
-public class MultiAdFetcher implements Fetcher<Holder> {
+public class AppInstallAdFetcher implements Fetcher<AppInstallAdViewHolder> {
 
     private final Object mSyncObject = new Object();
     private AdLoader mAdLoader;
     private String mAdUnitId;
-    private NativeAppInstallAd mAppAd;
-    private NativeContentAd mContentAd;
+    private NativeAppInstallAd mContentAd;
+    private AppInstallAdViewHolder mViewHolder;
 
-    public MultiAdFetcher(String adUnitId) {
+    /**
+     * Creates a {@link AppInstallAdFetcher}.
+     *
+     * @param adUnitId The ad unit ID used to request ads.
+     */
+    public AppInstallAdFetcher(String adUnitId) {
         this.mAdUnitId = adUnitId;
     }
 
@@ -30,41 +34,32 @@ public class MultiAdFetcher implements Fetcher<Holder> {
     public void fetchAd(Context context) {
         synchronized (mSyncObject) {
             if ((mAdLoader != null) && mAdLoader.isLoading()) {
-                Log.d(this.getClass().getName(), "MultiAdFetcher is already loading an ad.");
+                Log.d(this.getClass().getName(), "AppAdFetcher is already loading an ad.");
                 return;
             }
 
             // If an ad previously loaded, do nothing.
-            if (mContentAd != null || mAppAd != null) {
+            if (mContentAd != null) {
                 return;
             }
 
-            NativeContentAd.OnContentAdLoadedListener contentAdListener =
-                    new NativeContentAd.OnContentAdLoadedListener() {
-                        public void onContentAdLoaded(NativeContentAd ad) {
-                            mContentAd = ad;
-                        }
-                    };
-
-            NativeAppInstallAd.OnAppInstallAdLoadedListener appAdListener =
+            NativeAppInstallAd.OnAppInstallAdLoadedListener contentAdListener =
                     new NativeAppInstallAd.OnAppInstallAdLoadedListener() {
                         @Override
                         public void onAppInstallAdLoaded(NativeAppInstallAd nativeAppInstallAd) {
-                            mAppAd = nativeAppInstallAd;
+                            mContentAd = nativeAppInstallAd;
                         }
                     };
 
-
             if (mAdLoader == null) {
                 mAdLoader = new AdLoader.Builder(context, mAdUnitId)
-                        .forContentAd(contentAdListener)
-                        .forAppInstallAd(appAdListener)
+                        .forAppInstallAd(contentAdListener)
                         .withAdListener(new AdListener() {
                             @Override
                             public void onAdFailedToLoad(int errorCode) {
                                 //TODO Tratar erro.
                                 Log.e(this.getClass().getName(),
-                                        "Content Ad Failed to load: " + errorCode);
+                                        "App Ad Failed to load: " + errorCode);
                             }
                         }).build();
             }
@@ -80,16 +75,12 @@ public class MultiAdFetcher implements Fetcher<Holder> {
     }
 
     @Override
-    public void showAd(Holder holder) {
-        if(mContentAd == null && mAppAd == null) {
+    public void showAd(AppInstallAdViewHolder holder) {
+        if(mContentAd == null) {
             holder.hideView();
             return;
         }
 
-        holder.populateView(isContentAd() ? mContentAd : mAppAd);
-    }
-
-    public boolean isContentAd() {
-        return mContentAd != null;
+        holder.populateView(mContentAd);
     }
 }

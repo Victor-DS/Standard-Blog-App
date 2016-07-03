@@ -1,4 +1,4 @@
-package app.blog.standard.standardblogapp.model.advertisement;
+package app.blog.standard.standardblogapp.model.admob;
 
 import android.content.Context;
 import android.util.Log;

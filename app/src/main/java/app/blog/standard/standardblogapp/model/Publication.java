@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.text.DateFormat;
@@ -16,7 +17,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import app.blog.standard.standardblogapp.R;
-import app.blog.standard.standardblogapp.model.advertisement.MultiAdFetcher;
+import app.blog.standard.standardblogapp.model.facebookads.FacebookAdFetcher;
 import app.blog.standard.standardblogapp.model.util.DateHelper;
 import app.blog.standard.standardblogapp.model.util.Util;
 import app.blog.standard.standardblogapp.model.util.WebViewUtil;
@@ -26,7 +27,7 @@ import app.blog.standard.standardblogapp.model.util.WebViewUtil;
  */
 public class Publication implements Parcelable {
 
-    private boolean ad;
+    private FacebookAdFetcher adFetcher;
 
     private String title, url, comments, creator, category[], description, content;
     private Date date;
@@ -187,14 +188,13 @@ public class Publication implements Parcelable {
         Document document = Jsoup.parse(this.content);
         Elements aElements = document.getElementsByTag("img");
 
-        if(aElements.isEmpty()) {
-            if(hasYoutubeVideo())
-                return getYoutubeImageURL();
-            else
-                return null;
-        }
+        if(aElements.isEmpty()) return null;
 
-        return aElements.first().absUrl("abs:src");
+        for(Element e : aElements)
+            if(!e.absUrl("abs:src").contains("feedburner"))
+                return e.absUrl("abs:src");
+
+        return getYoutubeImageURL();
     }
 
     public boolean hasYoutubeVideo() {
@@ -232,11 +232,15 @@ public class Publication implements Parcelable {
 
     //region NativeAds
     public boolean hasNativeAds() {
-        return ad;
+        return adFetcher != null;
     }
 
-    public void setAd() {
-        this.ad = true;
+    public void setAd(FacebookAdFetcher adFetcher) {
+        this.adFetcher = adFetcher;
+    }
+
+    public FacebookAdFetcher getAd() {
+        return adFetcher;
     }
     //endregion
 

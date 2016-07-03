@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Le Ninja</string>
     <string name="view_on_web_option">Ver no navegador</string>
     <string name="title_activity_settings">COnfigurações</string>
     <string name="synchronizing">Sincronizando…</string>
-    <string name="share_publication_text">Vi um post no App do Le Ninja para Android:</string>
     <string name="share_option">Compartilhar</string>
     <string name="share_image">Compartilhar imagem</string>
     <string name="share">Compartilhar</string>
     <string name="save">Salvar</string>
-    <string name="pref_title_sync_keep_up_to">Manter até</string>
     <string name="pref_title_sync_frequency">Frequência de sincronização</string>
-    <string name="pref_title_publicity">Posts publicitários</string>
     <string name="pref_title_new_post_notification">Notificar sobre novos posts</string>
     <string name="pref_title_mobile_data">Usar dados móveis</string>
     <string name="pref_header_general">Publicações</string>
     <string name="pref_header_data_sync"><![CDATA[Dados & sincronização]]></string>
-    <string name="pref_description_publicity">Mostrar posts marcados como publicidade (Funciona só se o Blog marcar corretamente)</string>
     <string name="pref_description_new_post_notification">Mandar notificações quando terminar sincronização e tiver novos posts.</string>
     <string name="pref_description_mobile_data">Usar dados móveis para sincronizar posts em background (Recomendado: Off)</string>
     <string name="new_posts_synced">Tem posts novos!</string>
@@ -33,5 +28,17 @@
     <string name="action_more_apps">Mais apps</string>
     <string name="action_home">Início</string>
     <string name="action_about">Sobre</string>
-    <string name="about_message">App feito de fã para fãs.         \n\nNão tenho qualquer relação com o blog, para qualquer contato:         \nvdsantiago1@gmail.com         \n\nGostou? Avalie o App no Google Play!</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>Alta</item>
+        <item>Média</item>
+        <item>Baixa</item>
+        <item>Nunca</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
 </resources>
