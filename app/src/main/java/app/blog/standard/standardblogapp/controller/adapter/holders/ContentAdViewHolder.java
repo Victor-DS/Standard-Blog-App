@@ -12,7 +12,7 @@ import com.google.android.gms.ads.formats.NativeContentAdView;
 import java.util.List;
 
 import app.blog.standard.standardblogapp.R;
-import app.blog.standard.standardblogapp.model.advertisement.ContentAdFetcher;
+import app.blog.standard.standardblogapp.model.admob.ContentAdFetcher;
 
 /**
  * A class that creates, holds, and populates the view assets for a {@link NativeContentAd}.

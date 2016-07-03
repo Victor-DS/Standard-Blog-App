@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         //endregion
 
+        Util.dismissNotification();
+
         MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
         publicationHelper = PublicationHelper.getInstance(this);
 
