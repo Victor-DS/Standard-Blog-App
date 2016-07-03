@@ -27,7 +27,7 @@ public class XMLParser {
             throws XmlPullParserException, IOException {
         if(rss == null || rss.isEmpty()) throw new XmlPullParserException("No XML file");
         if(rss.startsWith("<html>")) throw new XmlPullParserException("Not a valid XML feed");
-        if(rss.startsWith("\uFEFF")) rss = rss.substring(1);
+        while(rss.startsWith("\uFEFF")) rss = rss.substring(1);
 
         ArrayList<Publication> aPublications = new ArrayList<>();
 
