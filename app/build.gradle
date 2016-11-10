@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "app.blog.standard.standardblogapp"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "Australia"
     }
@@ -19,65 +19,8 @@ android {
         }
     }
     productFlavors {
-        oleDoBrasil {
-            applicationId "br.com.oledobrasil.nao.oficial"
-        }
-        naoSalvo {
-            applicationId "br.com.naosalvo.nao.oficial"
-        }
-        ahNegao {
-            applicationId "br.com.ahnegao.nao.oficial"
-        }
-        bobagento {
-            applicationId "com.bobagento.nao.oficial"
-        }
-        capinaremos {
-            applicationId "com.capinaremos.nao.oficial"
-        }
-        chongas {
-            applicationId "br.com.chongas.nao.oficial"
-        }
-        cogumeloLouco {
-            applicationId "com.cogumelolouco.nao.oficial"
-        }
-        failWars {
-            applicationId "br.blog.failwars.nao.oficial"
-        }
-        insoonia {
-            applicationId "com.insoonia.nao.oficial"
-        }
-        jacareBanguela {
-            applicationId "br.com.jacarebanguela.nao.oficial"
-        }
-        jesusManero {
-            applicationId "br.blog.jesusmanero.nao.oficial"
-        }
-        leNinja {
-            applicationId "br.com.leninja.nao.oficial"
-        }
-        memetizando {
-            applicationId "br.com.memetizando.nao.oficial"
-        }
-        naoIntendo {
-            applicationId "br.com.naointendo.nao.oficial"
-        }
-        naoMesmo {
-            applicationId "br.com.naomesmo.nao.oficial"
-        }
-        sedentario {
-            applicationId "org.sedentario.nao.oficial"
-        }
-        sensacionalista {
-            applicationId "br.com.sensacionalista.nao.oficial"
-        }
-        tenso {
-            applicationId "br.blog.tenso.nao.oficial"
-        }
-        trollando {
-            applicationId "com.trollando.nao.oficial"
-        }
-        versoDoInverso {
-            applicationId "br.com.oversodoinverso.nao.oficial"
+        myBlog {
+            applicationId "com.myblog"
         }
     }
 }
@@ -85,12 +28,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:support-v4:25.0.0'
     compile 'com.commit451:PhotoView:1.2.4'
-    compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.google.android.gms:play-services-analytics:9.0.1'
